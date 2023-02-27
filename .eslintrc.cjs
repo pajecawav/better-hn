@@ -1,7 +1,7 @@
 module.exports = {
 	root: true,
-	extends: ["@nuxt/eslint-config"],
+	extends: ["@nuxt/eslint-config", "prettier"],
 	rules: {
-		"vue/html-indent": "off",
+		"vue/multi-word-component-names": "off",
 	},
 };
