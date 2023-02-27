@@ -49,6 +49,8 @@ const isFolded = ref(false);
 }
 
 .content {
+	overflow-wrap: break-word;
+
 	p {
 		margin-block: var(--size-2);
 	}

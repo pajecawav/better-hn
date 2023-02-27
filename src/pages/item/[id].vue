@@ -66,6 +66,8 @@ function formatUrl(url: string): string {
 }
 
 .content {
+	overflow-wrap: break-word;
+
 	a {
 		text-decoration: underline;
 	}
