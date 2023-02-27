@@ -1,5 +1,5 @@
 <template>
-	<ErrorMessage v-if="!data">Failed to load posts.</ErrorMessage>
+	<ErrorMessage v-if="!data">Failed to load items.</ErrorMessage>
 
 	<template v-else>
 		<div :class="$style.list">
@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { TOPICS } from "../lib/posts";
+import { TOPICS } from "../lib/items";
 
 definePageMeta({
 	validate: route => {
@@ -49,8 +49,7 @@ const ITEMS_PER_PAGE = 30;
 
 const route = useRoute();
 
-const { data } = await useFetch("/api/posts", {
-	method: "get",
+const { data } = await useFetch("/api/items", {
 	params: computed(() => ({ topic: route.params.topic, page: route.query.page })),
 });
 

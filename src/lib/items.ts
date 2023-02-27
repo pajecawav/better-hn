@@ -5,7 +5,7 @@ export const TOPICS = {
 	show: "show",
 };
 
-export interface Post {
+export interface Item {
 	id: number;
 	title: string;
 	points?: number | null;

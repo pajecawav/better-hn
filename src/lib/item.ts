@@ -9,7 +9,7 @@ export interface Comment {
 	url: string;
 }
 
-export interface Post {
+export interface Item {
 	id: number;
 	title: string;
 	points: number;

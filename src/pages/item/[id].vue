@@ -1,20 +1,20 @@
 <template>
-	<ErrorMessage v-if="!post">Post not found.</ErrorMessage>
+	<ErrorMessage v-if="!item">Item not found.</ErrorMessage>
 
 	<template v-else>
-		<article :class="$style.post">
-			<NuxtLink :to="formatUrl(post.url)">
-				<h1 :class="$style.title">{{ post.title }}</h1>
-				<span v-if="post.domain" :class="$style.domain"> ({{ post.domain }})</span>
+		<article :class="$style.item">
+			<NuxtLink :to="formatUrl(item.url)">
+				<h1 :class="$style.title">{{ item.title }}</h1>
+				<span v-if="item.domain" :class="$style.domain"> ({{ item.domain }})</span>
 			</NuxtLink>
 
 			<p :class="$style.info">
-				{{ post.points }} points by
-				<NuxtLink :to="`/user/${post.user}`">{{ post.user }}</NuxtLink> {{ post.time_ago }}
+				{{ item.points }} points by
+				<NuxtLink :to="`/user/${item.user}`">{{ item.user }}</NuxtLink> {{ item.time_ago }}
 			</p>
 
 			<!-- eslint-disable-next-line vue/no-v-html -->
-			<div v-if="post.content" v-html="post.content" />
+			<div v-if="item.content" v-html="item.content" />
 		</article>
 	</template>
 </template>
@@ -26,7 +26,7 @@ definePageMeta({
 
 const route = useRoute();
 const id = route.params.id as string;
-const { data: post } = await useFetch(`/api/posts/${id}`);
+const { data: item } = await useFetch(`/api/items/${id}`);
 
 function formatUrl(url: string): string {
 	if (url.startsWith("http")) return url;
@@ -35,7 +35,7 @@ function formatUrl(url: string): string {
 </script>
 
 <style module lang="scss">
-.post {
+.item {
 	border-bottom: 2px solid var(--neutral-200);
 
 	:global(.dark) & {
