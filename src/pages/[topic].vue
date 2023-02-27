@@ -16,7 +16,9 @@
 					</h2>
 					<p :class="$style.info">
 						{{ item.points }} points by
-						<NuxtLink :to="`/user/${item.user}`">{{ item.user }}</NuxtLink>
+						<NuxtLink v-if="item.user" :to="`/user/${item.user}`">{{
+							item.user
+						}}</NuxtLink>
 						{{ item.time_ago }} |
 						<NuxtLink :to="`/item/${item.id}`"
 							>{{ item.comments_count }} comments</NuxtLink

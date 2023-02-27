@@ -17,6 +17,9 @@ export default defineNuxtConfig({
 	css: ["@/assets/main.css"],
 	app: {
 		head: {
+			htmlAttrs: {
+				lang: "en",
+			},
 			title: "Better HN",
 			script: [{ children: themeScript }],
 		},
