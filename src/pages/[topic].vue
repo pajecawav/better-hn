@@ -14,14 +14,15 @@
 							>
 						</NuxtLink>
 					</h2>
-					<p :class="$style.info">
+
+					<p v-if="item.type === 'job'" :class="$style.info">{{ item.time_ago }}</p>
+					<p v-else :class="$style.info">
 						{{ item.points }} points by
-						<NuxtLink v-if="item.user" :to="`/user/${item.user}`">{{
-							item.user
-						}}</NuxtLink>
+						<NuxtLink :to="`/user/${item.user}`">{{ item.user }}</NuxtLink>
 						{{ item.time_ago }} |
 						<NuxtLink :to="`/item/${item.id}`"
-							>{{ item.comments_count }} comments</NuxtLink
+							>{{ item.comments_count }}
+							{{ item.comments_count === 1 ? "comment" : "comments" }}</NuxtLink
 						>
 					</p>
 				</div>

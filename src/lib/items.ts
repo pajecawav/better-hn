@@ -5,7 +5,7 @@ export const TOPICS = {
 	show: "show",
 };
 
-export interface Item {
+export interface FeedItem {
 	id: number;
 	title: string;
 	points?: number | null;

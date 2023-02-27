@@ -1,4 +1,4 @@
-import { Item, TOPICS } from "~~/src/lib/items";
+import { FeedItem, TOPICS } from "~~/src/lib/items";
 
 export default defineEventHandler(async event => {
 	const query = getQuery(event);
@@ -14,7 +14,7 @@ export default defineEventHandler(async event => {
 
 	const page = Math.max(1, +(query.page ?? "1") || 1);
 
-	const items = await $fetch<Item[]>(`https://api.hnpwa.com/v0/${topic}/${page}.json`);
+	const items = await $fetch<FeedItem[]>(`https://api.hnpwa.com/v0/${topic}/${page}.json`);
 
 	setHeader(event, "cache-control", "public, max-age=60");
 
