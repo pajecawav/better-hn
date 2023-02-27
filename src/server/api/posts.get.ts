@@ -1,4 +1,4 @@
-import { TopicItem, TOPICS } from "~~/src/lib/topics";
+import { Post, TOPICS } from "~~/src/lib/posts";
 
 export default defineEventHandler(async event => {
 	const query = getQuery(event);
@@ -14,7 +14,9 @@ export default defineEventHandler(async event => {
 
 	const page = Math.max(1, +(query.page ?? "1") || 1);
 
-	const items: TopicItem[] = await $fetch(`https://api.hnpwa.com/v0/${topic}/${page}.json`);
+	const items = await $fetch<Post[]>(`https://api.hnpwa.com/v0/${topic}/${page}.json`);
 
-	return items;
+	setHeader(event, "cache-control", "public, max-age=60");
+
+	return { topic: topicName, page, items };
 });

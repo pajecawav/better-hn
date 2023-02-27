@@ -36,11 +36,11 @@ const { theme, toggleTheme } = useTheme();
 .link {
 	padding: var(--size-1) var(--size-2);
 	border-radius: var(--radius-md);
-	transition: 100ms;
+	transition: background-color 100ms;
 
 	&:hover,
 	&__active {
-		background: var(--gray-100);
+		background: var(--orange-200);
 	}
 
 	:global(.dark) :is(&:hover, &__active) {
@@ -53,10 +53,10 @@ const { theme, toggleTheme } = useTheme();
 	padding: var(--size-1);
 	margin-left: auto;
 	border-radius: var(--radius-md);
-	transition: 100ms;
+	transition: background-color 100ms;
 
 	&:hover {
-		background: var(--gray-100);
+		background: var(--orange-200);
 	}
 
 	:global(.dark) &:hover {
