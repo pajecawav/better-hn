@@ -7,7 +7,7 @@
 
 <style module>
 .container {
-	max-width: 40rem;
+	max-width: var(--size-screen-md);
 	margin: 0 auto;
 }
 </style>

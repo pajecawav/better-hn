@@ -30,6 +30,7 @@ const { theme, toggleTheme } = useTheme();
 	gap: var(--size-2);
 
 	padding: var(--size-2) 0;
+	margin-bottom: var(--size-2);
 }
 
 .link {
