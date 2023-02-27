@@ -2,7 +2,7 @@ const themeScript = `
 (function() {
 	const storedTheme = window.localStorage.getItem("bhn.theme");
 	const media = window.matchMedia("(prefers-color-scheme: dark)");
-	if (storedTheme === "dark" || media.matches) {
+	if (storedTheme === "dark" || (!storedTheme && media.matches)) {
 		document.documentElement.classList.add("dark");
 	}
 })();
