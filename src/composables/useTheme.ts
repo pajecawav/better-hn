@@ -21,7 +21,7 @@ function getTheme(): Theme | undefined {
 }
 
 export const useTheme = () => {
-	const theme = ref<"light" | "dark" | undefined>(getTheme());
+	const theme = useState("theme", getTheme);
 
 	function toggleTheme() {
 		theme.value = theme.value === "light" ? "dark" : "light";

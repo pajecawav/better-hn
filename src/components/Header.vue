@@ -7,13 +7,15 @@
 			>Show</NuxtLink
 		>
 
-		<button
-			:class="$style.icon_button"
-			:title="`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`"
-			@click="toggleTheme"
-		>
-			<component :is="theme == 'light' ? MoonIcon : SunIcon" />
-		</button>
+		<ClientOnly>
+			<button
+				:class="$style.icon_button"
+				:title="`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`"
+				@click="toggleTheme"
+			>
+				<component :is="theme == 'light' ? MoonIcon : SunIcon" />
+			</button>
+		</ClientOnly>
 	</header>
 </template>
 
