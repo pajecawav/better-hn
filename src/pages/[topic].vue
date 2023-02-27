@@ -26,7 +26,9 @@
 			</template>
 		</div>
 
-		<NuxtLink :to="{ path: `/${data.topic}`, query: { page: data.page + 1 } }"
+		<NuxtLink
+			:to="{ path: `/${data.topic}`, query: { page: data.page + 1 } }"
+			:class="$style.moreLink"
 			>More...</NuxtLink
 		>
 	</template>
@@ -82,5 +84,11 @@ const startIndex = computed(() => 1 + ((data.value?.page ?? 1) - 1) * ITEMS_PER_
 	a {
 		text-decoration: underline;
 	}
+}
+
+.moreLink {
+	display: block;
+	margin-top: var(--size-4);
+	text-decoration: underline;
 }
 </style>

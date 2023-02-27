@@ -1,6 +1,10 @@
 @import "./preflight.css";
 @import "tailwind-vars";
 
+html {
+	scrollbar-gutter: stable;
+}
+
 html.dark {
 	background: var(--zinc-900);
 	color: #fff;
