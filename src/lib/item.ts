@@ -6,6 +6,7 @@ export interface Comment {
 	content: string;
 	deleted?: boolean;
 	comments: Comment[];
+	comments_count: number;
 	url: string;
 }
 

@@ -14,8 +14,10 @@
 			</p>
 
 			<!-- eslint-disable-next-line vue/no-v-html -->
-			<div v-if="item.content" v-html="item.content" />
+			<div v-if="item.content" :class="$style.content" v-html="item.content" />
 		</article>
+
+		<ItemComment v-for="comment of item.comments" :key="comment.id" :comment="comment" />
 	</template>
 </template>
 
@@ -36,14 +38,10 @@ function formatUrl(url: string): string {
 
 <style module lang="scss">
 .item {
-	border-bottom: 2px solid var(--neutral-200);
-
-	:global(.dark) & {
-		border-bottom: 2px solid var(--neutral-700);
-	}
+	margin-bottom: var(--size-4);
 
 	& p:not(.info) {
-		margin-block: var(--size-4);
+		margin-block: var(--size-2);
 	}
 }
 
@@ -60,6 +58,14 @@ function formatUrl(url: string): string {
 }
 
 .info {
+	margin-bottom: var(--size-4);
+
+	a {
+		text-decoration: underline;
+	}
+}
+
+.content {
 	a {
 		text-decoration: underline;
 	}
