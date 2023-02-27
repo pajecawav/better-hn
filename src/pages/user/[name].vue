@@ -22,7 +22,7 @@
 		</p>
 
 		<!-- eslint-disable-next-line vue/no-v-html -->
-		<div :class="$style.about" v-html="user.about" />
+		<div v-if="user.about" :class="$style.about" v-html="user.about" />
 	</template>
 </template>
 
@@ -34,7 +34,7 @@ definePageMeta({
 
 const route = useRoute();
 
-const { data: user } = await useFetch(`/api/user/${route.params.name}`);
+const { data: user } = await useFetch(`/api/users/${route.params.name}`);
 </script>
 
 <style module lang="scss">
@@ -50,7 +50,7 @@ const { data: user } = await useFetch(`/api/user/${route.params.name}`);
 }
 
 .links {
-	margin-block: 1em;
+	margin-block: var(--size-4);
 
 	a {
 		text-decoration: underline;
@@ -59,7 +59,7 @@ const { data: user } = await useFetch(`/api/user/${route.params.name}`);
 
 .about {
 	& p {
-		margin-block: 1em;
+		margin-block: var(--size-4);
 	}
 }
 </style>
