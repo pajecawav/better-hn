@@ -50,8 +50,12 @@ function formatUrl(url: string): string {
 .title {
 	font-size: var(--font-size-2xl);
 	font-weight: 500;
-	display: inline-block;
+	display: inline;
 	margin-bottom: var(--size-2);
+}
+
+.domain {
+	font-size: var(--font-size-xl);
 }
 
 .domain,

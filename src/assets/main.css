@@ -3,11 +3,13 @@
 
 html {
 	scrollbar-gutter: stable;
+	color-scheme: light;
 }
 
 html.dark {
 	background: var(--zinc-900);
 	color: #fff;
+	color-scheme: dark;
 }
 
 body {
