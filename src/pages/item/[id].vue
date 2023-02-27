@@ -30,6 +30,8 @@ const route = useRoute();
 const id = route.params.id as string;
 const { data: item } = await useFetch(`/api/items/${id}`);
 
+useHead({ title: item.value?.title });
+
 function formatUrl(url: string): string {
 	if (url.startsWith("http")) return url;
 	return `/item/${id}`;

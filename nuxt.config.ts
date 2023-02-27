@@ -20,7 +20,7 @@ export default defineNuxtConfig({
 			htmlAttrs: {
 				lang: "en",
 			},
-			title: "Better HN",
+			meta: [{ name: "description", content: "A Hacker News clone built with Nuxt 3" }],
 			script: [{ children: themeScript }],
 		},
 	},

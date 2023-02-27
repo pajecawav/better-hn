@@ -35,6 +35,8 @@ definePageMeta({
 const route = useRoute();
 
 const { data: user } = await useFetch(`/api/users/${route.params.name}`);
+
+useHead({ title: user.value?.id });
 </script>
 
 <style module lang="scss">
