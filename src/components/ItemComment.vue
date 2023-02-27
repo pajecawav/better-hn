@@ -35,7 +35,7 @@ const isFolded = ref(false);
 	border-top: 2px solid var(--neutral-200);
 
 	:global(.dark) & {
-		border-bottom: 2px solid var(--neutral-700);
+		border-color: var(--neutral-700);
 	}
 }
 
