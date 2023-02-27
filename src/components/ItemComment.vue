@@ -58,6 +58,11 @@ const isFolded = ref(false);
 	a {
 		text-decoration: underline;
 	}
+
+	pre {
+		overflow-x: auto;
+		font-size: var(--font-size-sm);
+	}
 }
 
 .replies {
