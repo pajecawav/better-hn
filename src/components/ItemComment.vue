@@ -71,11 +71,6 @@ const isFolded = ref(false);
 
 .comment {
 	margin-block: var(--size-4);
-	border-top: 2px solid var(--neutral-200);
-
-	:global(.dark) & {
-		border-color: var(--neutral-700);
-	}
 }
 
 .info {
@@ -106,6 +101,11 @@ const isFolded = ref(false);
 }
 
 .replies {
-	margin-left: var(--size-8);
+	padding-left: var(--size-8);
+	border-left: 2px dashed var(--neutral-200);
+
+	:global(.dark) & {
+		border-color: var(--neutral-700);
+	}
 }
 </style>
