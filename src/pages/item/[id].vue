@@ -17,7 +17,14 @@
 			<div v-if="item.content" :class="$style.content" v-html="item.content" />
 		</article>
 
-		<ItemComment v-for="comment of item.comments" :key="comment.id" :comment="comment" />
+		<ItemComment
+			v-for="(comment, index) of item.comments"
+			:key="comment.id"
+			:comment="comment"
+			:root-id="comment.id"
+			:prev-id="item.comments[index - 1]?.id"
+			:next-id="item.comments[index + 1]?.id"
+		/>
 	</template>
 </template>
 

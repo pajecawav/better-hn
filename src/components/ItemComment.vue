@@ -1,8 +1,29 @@
 <template>
-	<article :class="$style.comment">
+	<article :id="comment.id.toString()" :class="$style.comment">
 		<p :class="$style.info">
-			<NuxtLink :to="`/user/${comment.user}`">{{ comment.user }}</NuxtLink>
-			{{ comment.time_ago }}
+			<NuxtLink :class="$style.user" :to="`/user/${comment.user}`">{{
+				comment.user
+			}}</NuxtLink>
+
+			{{ " " }}<CommentLink :id="comment.id">{{ comment.time_ago }}</CommentLink>
+
+			<template v-if="rootId && rootId !== comment.id">
+				{{ " | " }}<CommentLink :id="rootId">root</CommentLink>
+			</template>
+
+			<template v-if="parentId">
+				{{ " | " }}<CommentLink :id="parentId">parent</CommentLink>
+			</template>
+
+			<template v-if="prevId">
+				{{ " | " }}<CommentLink :id="prevId">prev</CommentLink>
+			</template>
+
+			<template v-if="nextId">
+				{{ " | " }}<CommentLink :id="nextId">next</CommentLink>
+			</template>
+
+			{{ " | " }}
 			<button
 				:title="isFolded ? 'Unfold comment' : 'Fold comment'"
 				@click="isFolded = !isFolded"
@@ -15,7 +36,15 @@
 		<div v-show="!isFolded" :class="$style.content" v-html="comment.content" />
 
 		<div v-show="!isFolded" :class="$style.replies">
-			<ItemComment v-for="reply of comment.comments" :key="reply.id" :comment="reply" />
+			<ItemComment
+				v-for="(reply, index) of comment.comments"
+				:key="reply.id"
+				:comment="reply"
+				:parent-id="comment.id"
+				:root-id="rootId"
+				:prev-id="comment.comments[index - 1]?.id"
+				:next-id="comment.comments[index + 1]?.id"
+			/>
 		</div>
 	</article>
 </template>
@@ -23,13 +52,23 @@
 <script setup lang="ts">
 import { Comment } from "../lib/item";
 
-const props = defineProps<{ comment: Comment }>();
-const { comment } = toRefs(props);
+const props = defineProps<{
+	comment: Comment;
+	rootId?: number;
+	parentId?: number;
+	prevId?: number;
+	nextId?: number;
+}>();
+const { comment, parentId, prevId, nextId } = toRefs(props);
 
 const isFolded = ref(false);
 </script>
 
 <style module lang="scss">
+:global html {
+	scroll-behavior: smooth;
+}
+
 .comment {
 	margin-block: var(--size-4);
 	border-top: 2px solid var(--neutral-200);
@@ -43,7 +82,8 @@ const isFolded = ref(false);
 	color: var(--neutral-400);
 	margin-block: var(--size-4);
 
-	a {
+	.user,
+	a:hover {
 		text-decoration: underline;
 	}
 }
