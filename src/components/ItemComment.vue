@@ -1,7 +1,7 @@
 <template>
 	<article :id="comment.id.toString()" :class="$style.comment">
 		<p :class="$style.info">
-			<NuxtLink :class="$style.user" :to="`/user/${comment.user}`">{{
+			<NuxtLink v-if="comment.user" :class="$style.user" :to="`/user/${comment.user}`">{{
 				comment.user
 			}}</NuxtLink>
 
