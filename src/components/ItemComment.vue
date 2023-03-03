@@ -1,6 +1,6 @@
 <template>
 	<article :id="comment.id.toString()" :class="$style.comment">
-		<p :class="$style.info">
+		<p ref="infoRef" :class="$style.info">
 			<NuxtLink v-if="comment.user" :class="$style.user" :to="`/user/${comment.user}`">{{
 				comment.user
 			}}</NuxtLink>
@@ -35,16 +35,24 @@
 		<!-- eslint-disable-next-line vue/no-v-html -->
 		<div v-show="!isFolded" :class="$style.content" v-html="comment.content" />
 
-		<div v-show="!isFolded" :class="$style.replies">
-			<ItemComment
-				v-for="(reply, index) of comment.comments"
-				:key="reply.id"
-				:comment="reply"
-				:parent-id="comment.id"
-				:root-id="rootId"
-				:prev-id="comment.comments[index - 1]?.id"
-				:next-id="comment.comments[index + 1]?.id"
+		<div v-show="!isFolded" :class="$style.repliesContainer">
+			<button
+				:class="$style.foldButton"
+				aria-label="Fold comment"
+				tabindex="-1"
+				@click="foldWithScroll"
 			/>
+			<div :class="$style.replies">
+				<ItemComment
+					v-for="(reply, index) of comment.comments"
+					:key="reply.id"
+					:comment="reply"
+					:parent-id="comment.id"
+					:root-id="rootId"
+					:prev-id="comment.comments[index - 1]?.id"
+					:next-id="comment.comments[index + 1]?.id"
+				/>
+			</div>
 		</div>
 	</article>
 </template>
@@ -61,21 +69,24 @@ const props = defineProps<{
 }>();
 const { comment, parentId, prevId, nextId } = toRefs(props);
 
+const infoRef = ref<HTMLElement | null>(null);
+
 const isFolded = ref(false);
+
+function foldWithScroll() {
+	isFolded.value = true;
+	infoRef.value?.scrollIntoView({ block: "nearest" });
+}
 </script>
 
 <style module lang="scss">
-:global html {
-	scroll-behavior: smooth;
-}
-
 .comment {
-	margin-block: var(--size-4);
+	margin-block: var(--size-2);
 }
 
 .info {
 	color: var(--neutral-400);
-	margin-block: var(--size-4);
+	margin-block: var(--size-2);
 
 	.user,
 	a:hover {
@@ -100,12 +111,30 @@ const isFolded = ref(false);
 	}
 }
 
-.replies {
-	padding-left: var(--size-8);
-	border-left: 2px dashed var(--neutral-200);
+.repliesContainer {
+	display: flex;
 
-	:global(.dark) & {
-		border-color: var(--neutral-700);
+	> .foldButton {
+		flex: 0;
+		min-width: var(--size-8);
+		border-left: 2px dashed var(--neutral-200);
+		transition: border-color 100ms;
+
+		:global(.dark) & {
+			border-color: var(--neutral-700);
+		}
+
+		&:hover {
+			border-color: var(--orange-200);
+		}
+
+		:global(.dark) &:hover {
+			border-color: var(--neutral-400);
+		}
 	}
+}
+
+.replies {
+	overflow-x: hidden;
 }
 </style>
