@@ -5,9 +5,12 @@
 		<div :class="$style.list">
 			<template v-for="(item, index) of data.items" :key="item.id">
 				<span :class="$style.index">{{ startIndex + index }}</span>
-				<div :class="$style.item">
+				<div :class="[$style.item, 'item']" @focusin="selectedIndex = index">
 					<h2>
-						<NuxtLink :to="item.domain ? item.url : `/item/${item.id}`">
+						<NuxtLink
+							:to="item.domain ? item.url : `/item/${item.id}`"
+							class="itemLink"
+						>
 							{{ item.title }}
 							<span v-if="item.domain" :class="$style.domain"
 								>({{ item.domain }})</span
@@ -55,8 +58,51 @@ const route = useRoute();
 const { data } = await useFetch("/api/items", {
 	params: computed(() => ({ topic: route.params.topic, page: route.query.page })),
 });
-
 const startIndex = computed(() => 1 + ((data.value?.page ?? 1) - 1) * ITEMS_PER_PAGE);
+
+const selectedIndex = ref<number | null>(null);
+
+function focusSelectedItem() {
+	if (selectedIndex.value !== null) {
+		const urls = document.querySelectorAll<HTMLAnchorElement>(".item .itemLink");
+		urls.item(selectedIndex.value)?.focus();
+	}
+}
+
+function selectNextItem() {
+	selectedIndex.value = Math.min((selectedIndex.value ?? -1) + 1, ITEMS_PER_PAGE - 1);
+	focusSelectedItem();
+}
+
+function selectPrevItem() {
+	selectedIndex.value = Math.max(0, (selectedIndex.value ?? 0) - 1);
+	focusSelectedItem();
+}
+
+function openComments() {
+	if (selectedIndex.value === null) return;
+
+	const id = data.value?.items[selectedIndex.value].id;
+	if (id) {
+		navigateTo({ path: `/item/${id}` });
+	}
+}
+
+function openUser() {
+	if (selectedIndex.value === null) return;
+
+	const user = data.value?.items[selectedIndex.value].user;
+	if (user) {
+		navigateTo({ path: `/user/${user}` });
+	}
+}
+
+useHotkeys({
+	j: selectNextItem,
+	k: selectPrevItem,
+	c: openComments,
+	u: openUser,
+});
 </script>
 
 <style module lang="scss">
