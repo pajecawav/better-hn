@@ -7,46 +7,47 @@
 		:data-nextid="nextId"
 		:data-previd="prevId"
 		:data-childid="comment.comments[0]?.id ?? undefined"
-		:tabindex="-1"
 	>
-		<p ref="infoRef" :class="$style.info">
-			<NuxtLink
-				v-if="comment.user"
-				:class="[$style.user, 'commentUser']"
-				:to="`/user/${comment.user}`"
-				>{{ comment.user }}</NuxtLink
-			>
+		<div class="commentBody" :tabindex="-1">
+			<p ref="infoRef" :class="$style.info">
+				<NuxtLink
+					v-if="comment.user"
+					:class="[$style.user, 'commentUser']"
+					:to="`/user/${comment.user}`"
+					>{{ comment.user }}</NuxtLink
+				>
 
-			{{ " " }}<CommentLink :id="comment.id">{{ comment.time_ago }}</CommentLink>
+				{{ " " }}<CommentLink :id="comment.id">{{ comment.time_ago }}</CommentLink>
 
-			<template v-if="rootId && rootId !== comment.id">
-				{{ " | " }}<CommentLink :id="rootId">root</CommentLink>
-			</template>
+				<template v-if="rootId && rootId !== comment.id">
+					{{ " | " }}<CommentLink :id="rootId">root</CommentLink>
+				</template>
 
-			<template v-if="parentId">
-				{{ " | " }}<CommentLink :id="parentId">parent</CommentLink>
-			</template>
+				<template v-if="parentId">
+					{{ " | " }}<CommentLink :id="parentId">parent</CommentLink>
+				</template>
 
-			<template v-if="prevId">
-				{{ " | " }}<CommentLink :id="prevId">prev</CommentLink>
-			</template>
+				<template v-if="prevId">
+					{{ " | " }}<CommentLink :id="prevId">prev</CommentLink>
+				</template>
 
-			<template v-if="nextId">
-				{{ " | " }}<CommentLink :id="nextId">next</CommentLink>
-			</template>
+				<template v-if="nextId">
+					{{ " | " }}<CommentLink :id="nextId">next</CommentLink>
+				</template>
 
-			{{ " | " }}
-			<button
-				:title="isFolded ? 'Unfold comment' : 'Fold comment'"
-				class="foldToggle"
-				@click="isFolded = !isFolded"
-			>
-				{{ isFolded ? `[${comment.comments_count + 1} more]` : "[–]" }}
-			</button>
-		</p>
+				{{ " | " }}
+				<button
+					:title="isFolded ? 'Unfold comment' : 'Fold comment'"
+					class="foldToggle"
+					@click="isFolded = !isFolded"
+				>
+					{{ isFolded ? `[${comment.comments_count + 1} more]` : "[–]" }}
+				</button>
+			</p>
 
-		<!-- eslint-disable-next-line vue/no-v-html -->
-		<div v-show="!isFolded" :class="$style.content" v-html="comment.content" />
+			<!-- eslint-disable-next-line vue/no-v-html -->
+			<div v-show="!isFolded" :class="$style.content" v-html="comment.content" />
+		</div>
 
 		<div v-show="!isFolded" :class="$style.repliesContainer">
 			<button
@@ -94,11 +95,13 @@ function foldWithScroll() {
 
 <style module lang="scss">
 .comment {
-	outline-offset: 5px;
-
 	&:not(:first-child) {
 		margin-top: var(--size-2);
 	}
+}
+
+:global(.commentBody) {
+	outline-offset: 5px;
 }
 
 .info {

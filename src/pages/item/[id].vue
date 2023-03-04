@@ -50,7 +50,7 @@ function getSelectedComment() {
 
 function focusCommentById(id: string | number | undefined) {
 	if (id) {
-		const element = document.querySelector<HTMLElement>(`#comment-${id}`);
+		const element = document.querySelector<HTMLElement>(`#comment-${id} .commentBody`);
 		element?.focus();
 		element?.scrollIntoView({ block: "start" });
 	}
