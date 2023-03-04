@@ -110,7 +110,7 @@ function foldWithScroll() {
 }
 
 .content {
-	overflow-wrap: break-word;
+	overflow-wrap: anywhere;
 
 	p {
 		margin-block: var(--size-2);
@@ -122,6 +122,7 @@ function foldWithScroll() {
 
 	pre {
 		overflow-x: auto;
+		white-space: pre-wrap;
 		font-size: var(--font-size-sm);
 	}
 }
