@@ -130,6 +130,7 @@ useHotkeys({
 	text-align: right;
 }
 
+:global(.itemLink):visited,
 .index,
 .domain,
 .info {
