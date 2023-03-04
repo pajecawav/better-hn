@@ -44,6 +44,10 @@ function formatUrl(url: string): string {
 	return `/item/${id}`;
 }
 
+function getSelectedComment() {
+	return document.activeElement?.closest<HTMLElement>(".comment") ?? null;
+}
+
 function focusCommentById(id: string | number | undefined) {
 	if (id) {
 		const element = document.querySelector<HTMLElement>(`#comment-${id}`);
@@ -53,7 +57,7 @@ function focusCommentById(id: string | number | undefined) {
 }
 
 function selectComment(direction: "next" | "prev" | "parent" | "child" | "root") {
-	const comment = document.activeElement?.closest<HTMLElement>(".comment") ?? null;
+	const comment = getSelectedComment();
 	if (comment) {
 		const id = comment?.dataset[`${direction}id`];
 		focusCommentById(id);
@@ -62,12 +66,18 @@ function selectComment(direction: "next" | "prev" | "parent" | "child" | "root")
 	}
 }
 
+function toggleFoldComment() {
+	const comment = getSelectedComment();
+	comment?.querySelector<HTMLElement>(".foldToggle")?.click();
+}
+
 useHotkeys({
 	j: () => selectComment("next"),
 	k: () => selectComment("prev"),
 	h: () => selectComment("parent"),
 	l: () => selectComment("child"),
 	r: () => selectComment("root"),
+	f: toggleFoldComment,
 });
 </script>
 

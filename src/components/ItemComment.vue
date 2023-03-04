@@ -38,6 +38,7 @@
 			{{ " | " }}
 			<button
 				:title="isFolded ? 'Unfold comment' : 'Fold comment'"
+				class="foldToggle"
 				@click="isFolded = !isFolded"
 			>
 				{{ isFolded ? `[${comment.comments_count + 1} more]` : "[–]" }}
