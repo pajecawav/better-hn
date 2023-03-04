@@ -43,6 +43,32 @@ function formatUrl(url: string): string {
 	if (url.startsWith("http")) return url;
 	return `/item/${id}`;
 }
+
+function focusCommentById(id: string | number | undefined) {
+	if (id) {
+		const element = document.querySelector<HTMLElement>(`#comment-${id}`);
+		element?.focus();
+		element?.scrollIntoView({ block: "start" });
+	}
+}
+
+function selectComment(direction: "next" | "prev" | "parent" | "child" | "root") {
+	const comment = document.activeElement?.closest<HTMLElement>(".comment") ?? null;
+	if (comment) {
+		const id = comment?.dataset[`${direction}id`];
+		focusCommentById(id);
+	} else if (direction === "next") {
+		focusCommentById(item.value?.comments[0].id);
+	}
+}
+
+useHotkeys({
+	j: () => selectComment("next"),
+	k: () => selectComment("prev"),
+	h: () => selectComment("parent"),
+	l: () => selectComment("child"),
+	r: () => selectComment("root"),
+});
 </script>
 
 <style module lang="scss">
@@ -58,7 +84,6 @@ function formatUrl(url: string): string {
 	font-size: var(--font-size-2xl);
 	font-weight: 500;
 	display: inline;
-	margin-bottom: var(--size-2);
 }
 
 .domain {
@@ -71,7 +96,7 @@ function formatUrl(url: string): string {
 }
 
 .info {
-	margin-bottom: var(--size-4);
+	margin-top: var(--size-1);
 
 	a {
 		text-decoration: underline;
@@ -80,9 +105,14 @@ function formatUrl(url: string): string {
 
 .content {
 	overflow-wrap: break-word;
+	border-bottom: 2px solid var(--neutral-200);
 
 	a {
 		text-decoration: underline;
+	}
+
+	:global(.dark) & {
+		border-color: var(--neutral-700);
 	}
 }
 </style>

@@ -1,9 +1,21 @@
 <template>
-	<article :id="comment.id.toString()" :class="$style.comment">
+	<article
+		:id="`comment-${comment.id}`"
+		:class="[$style.comment, 'comment']"
+		:data-rootid="rootId"
+		:data-parentid="parentId"
+		:data-nextid="nextId"
+		:data-previd="prevId"
+		:data-childid="comment.comments[0]?.id ?? undefined"
+		:tabindex="-1"
+	>
 		<p ref="infoRef" :class="$style.info">
-			<NuxtLink v-if="comment.user" :class="$style.user" :to="`/user/${comment.user}`">{{
-				comment.user
-			}}</NuxtLink>
+			<NuxtLink
+				v-if="comment.user"
+				:class="[$style.user, 'commentUser']"
+				:to="`/user/${comment.user}`"
+				>{{ comment.user }}</NuxtLink
+			>
 
 			{{ " " }}<CommentLink :id="comment.id">{{ comment.time_ago }}</CommentLink>
 
@@ -81,12 +93,15 @@ function foldWithScroll() {
 
 <style module lang="scss">
 .comment {
-	margin-block: var(--size-2);
+	outline-offset: 5px;
+
+	&:not(:first-child) {
+		margin-top: var(--size-2);
+	}
 }
 
 .info {
 	color: var(--neutral-400);
-	margin-block: var(--size-2);
 
 	.user,
 	a:hover {
@@ -132,9 +147,5 @@ function foldWithScroll() {
 			border-color: var(--neutral-400);
 		}
 	}
-}
-
-.replies {
-	overflow-x: hidden;
 }
 </style>

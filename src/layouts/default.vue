@@ -1,7 +1,9 @@
 <template>
 	<div :class="$style.container">
 		<Header />
-		<slot />
+		<main>
+			<slot />
+		</main>
 	</div>
 </template>
 

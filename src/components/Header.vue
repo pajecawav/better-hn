@@ -1,11 +1,19 @@
 <template>
 	<header :class="$style.header">
-		<NuxtLink :class="$style.link" :active-class="$style.link__active" to="/top">Top</NuxtLink>
-		<NuxtLink :class="$style.link" :active-class="$style.link__active" to="/new">New</NuxtLink>
-		<NuxtLink :class="$style.link" :active-class="$style.link__active" to="/ask">Ask</NuxtLink>
-		<NuxtLink :class="$style.link" :active-class="$style.link__active" to="/show"
-			>Show</NuxtLink
-		>
+		<nav :class="$style.navigation">
+			<NuxtLink :class="$style.link" :active-class="$style.link__active" to="/top"
+				>Top</NuxtLink
+			>
+			<NuxtLink :class="$style.link" :active-class="$style.link__active" to="/new"
+				>New</NuxtLink
+			>
+			<NuxtLink :class="$style.link" :active-class="$style.link__active" to="/ask"
+				>Ask</NuxtLink
+			>
+			<NuxtLink :class="$style.link" :active-class="$style.link__active" to="/show"
+				>Show</NuxtLink
+			>
+		</nav>
 
 		<ClientOnly>
 			<button
@@ -33,6 +41,12 @@ const { theme, toggleTheme } = useTheme();
 
 	padding: var(--size-2) 0;
 	margin-bottom: var(--size-2);
+}
+
+.navigation {
+	display: flex;
+	align-items: center;
+	gap: var(--size-2);
 }
 
 .link {

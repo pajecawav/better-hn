@@ -111,7 +111,7 @@ useHotkeys({
 	c: () => openComments(false),
 	C: () => openComments(true),
 	u: () => openUser(false),
-	U: () => openUser(false),
+	U: () => openUser(true),
 });
 </script>
 

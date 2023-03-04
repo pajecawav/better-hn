@@ -21,4 +21,5 @@ export interface Item {
 	url: string;
 	domain?: string;
 	comments: Comment[];
+	comments_count: number;
 }
