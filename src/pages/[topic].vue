@@ -5,7 +5,7 @@
 		<div :class="$style.list">
 			<template v-for="(item, index) of data.items" :key="item.id">
 				<span :class="$style.index">{{ startIndex + index }}</span>
-				<div :class="[$style.item, 'item']" @focusin="selectedIndex = index">
+				<div :class="[$style.item, 'item']" :tabindex="-1" @focusin="selectedIndex = index">
 					<h2>
 						<NuxtLink
 							:to="item.domain ? item.url : `/item/${item.id}`"
@@ -63,7 +63,7 @@ const startIndex = computed(() => 1 + ((data.value?.page ?? 1) - 1) * ITEMS_PER_
 const selectedIndex = ref<number>(-1);
 
 function focusSelectedItem() {
-	const urls = document.querySelectorAll<HTMLAnchorElement>(".item .itemLink");
+	const urls = document.querySelectorAll<HTMLAnchorElement>(".item");
 	urls.item(selectedIndex.value)?.focus();
 }
 
@@ -75,6 +75,23 @@ function selectNextItem() {
 function selectPrevItem() {
 	selectedIndex.value = Math.max(0, selectedIndex.value - 1);
 	focusSelectedItem();
+}
+
+function openLink(newTab: boolean) {
+	if (selectedIndex.value === null) return;
+
+	const item = data.value?.items[selectedIndex.value];
+	if (!item) return;
+
+	const itemPath = `/item/${item.id}`;
+	if (item.domain) {
+		const target = newTab ? "_blank" : "_self";
+		window.open(item.url, target, "noopener,noreferrer");
+	} else if (newTab) {
+		window.open(itemPath, "_blank", "noopener,noreferrer");
+	} else {
+		navigateTo({ path: itemPath });
+	}
 }
 
 function openComments(newTab: boolean) {
@@ -108,6 +125,8 @@ function openUser(newTab: boolean) {
 useHotkeys({
 	j: selectNextItem,
 	k: selectPrevItem,
+	o: () => openLink(false),
+	O: () => openLink(true),
 	c: () => openComments(false),
 	C: () => openComments(true),
 	u: () => openUser(false),
@@ -128,6 +147,10 @@ useHotkeys({
 .index {
 	font-size: var(--font-size-2xl);
 	text-align: right;
+}
+
+.item {
+	outline-offset: 5px;
 }
 
 :global(.itemLink):visited,
