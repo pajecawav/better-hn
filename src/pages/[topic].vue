@@ -60,48 +60,58 @@ const { data } = await useFetch("/api/items", {
 });
 const startIndex = computed(() => 1 + ((data.value?.page ?? 1) - 1) * ITEMS_PER_PAGE);
 
-const selectedIndex = ref<number | null>(null);
+const selectedIndex = ref<number>(-1);
 
 function focusSelectedItem() {
-	if (selectedIndex.value !== null) {
-		const urls = document.querySelectorAll<HTMLAnchorElement>(".item .itemLink");
-		urls.item(selectedIndex.value)?.focus();
-	}
+	const urls = document.querySelectorAll<HTMLAnchorElement>(".item .itemLink");
+	urls.item(selectedIndex.value)?.focus();
 }
 
 function selectNextItem() {
-	selectedIndex.value = Math.min((selectedIndex.value ?? -1) + 1, ITEMS_PER_PAGE - 1);
+	selectedIndex.value = Math.min(selectedIndex.value + 1, ITEMS_PER_PAGE - 1);
 	focusSelectedItem();
 }
 
 function selectPrevItem() {
-	selectedIndex.value = Math.max(0, (selectedIndex.value ?? 0) - 1);
+	selectedIndex.value = Math.max(0, selectedIndex.value - 1);
 	focusSelectedItem();
 }
 
-function openComments() {
+function openComments(newTab: boolean) {
 	if (selectedIndex.value === null) return;
 
 	const id = data.value?.items[selectedIndex.value].id;
-	if (id) {
-		navigateTo({ path: `/item/${id}` });
+	if (!id) return;
+
+	const path = `/item/${id}`;
+	if (newTab) {
+		window.open(path, "_blank", "noopener,noreferrer");
+	} else {
+		navigateTo({ path });
 	}
 }
 
-function openUser() {
+function openUser(newTab: boolean) {
 	if (selectedIndex.value === null) return;
 
 	const user = data.value?.items[selectedIndex.value].user;
-	if (user) {
-		navigateTo({ path: `/user/${user}` });
+	if (!user) return;
+
+	const path = `/user/${user}`;
+	if (newTab) {
+		window.open(path, "_blank", "noopener,noreferrer");
+	} else {
+		navigateTo({ path });
 	}
 }
 
 useHotkeys({
 	j: selectNextItem,
 	k: selectPrevItem,
-	c: openComments,
-	u: openUser,
+	c: () => openComments(false),
+	C: () => openComments(true),
+	u: () => openUser(false),
+	U: () => openUser(false),
 });
 </script>
 

@@ -26,7 +26,7 @@ export const useHotkeys = (hotkeys: HotkeyMap) => {
 		timeoutId = window.setTimeout(reset, 750);
 	}
 
-	if (typeof window !== "undefined") {
+	if (process.client) {
 		document.body.addEventListener("keypress", handleKeyPress);
 	}
 

@@ -3,7 +3,7 @@ type Theme = "light" | "dark";
 const THEME_KEY = "bhn.theme";
 
 function getTheme(): Theme | undefined {
-	if (typeof window === "undefined") {
+	if (process.server) {
 		return undefined;
 	}
 
