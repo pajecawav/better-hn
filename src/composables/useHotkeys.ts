@@ -1,6 +1,10 @@
+import { useSettings } from "./useSettings";
+
 export type HotkeyMap = Record<string, () => void>;
 
 export const useHotkeys = (hotkeys: HotkeyMap) => {
+	const { settings } = useSettings();
+
 	const bufferedKeys: string[] = [];
 	let timeoutId: number | undefined = undefined;
 
@@ -9,6 +13,10 @@ export const useHotkeys = (hotkeys: HotkeyMap) => {
 	}
 
 	function handleKeyPress(event: KeyboardEvent) {
+		if (!settings.value.hotkeysEnabled) {
+			return;
+		}
+
 		window.clearTimeout(timeoutId);
 
 		bufferedKeys.push(event.key);

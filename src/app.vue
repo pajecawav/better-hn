@@ -7,10 +7,12 @@
 
 <script setup lang="ts">
 import { useHotkeys } from "./composables/useHotkeys";
+import { useSettings } from "./composables/useSettings";
 
 const router = useRouter();
 
 const { toggleTheme } = useTheme();
+const { settings } = useSettings();
 
 useHotkeys({
 	H: () => history.state.back && router.back(),
@@ -22,5 +24,6 @@ useHotkeys({
 	"g s": () => navigateTo("/show"),
 
 	"t t": toggleTheme,
+	"t h": () => (settings.value.hotkeysEnabled = !settings.value.hotkeysEnabled),
 });
 </script>
