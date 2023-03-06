@@ -6,7 +6,7 @@
 		<div :class="$style.info">
 			<span>Created:</span><span> {{ user?.created }}</span>
 
-			<span>Karma:</span> <span> {{ user?.created }}</span>
+			<span>Karma:</span> <span> {{ user?.karma }}</span>
 		</div>
 
 		<p :class="$style.links">
