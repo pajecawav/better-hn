@@ -64,7 +64,9 @@ const selectedIndex = ref<number>(-1);
 
 function focusSelectedItem() {
 	const urls = document.querySelectorAll<HTMLAnchorElement>(".item");
-	urls.item(selectedIndex.value)?.focus();
+	const item = urls.item(selectedIndex.value);
+	item?.focus();
+	item?.scrollIntoView({ block: "start" });
 }
 
 function selectNextItem() {
