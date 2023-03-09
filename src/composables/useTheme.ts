@@ -22,6 +22,7 @@ function getTheme(): Theme | undefined {
 
 export const useTheme = () => {
 	const theme = useState("theme", getTheme);
+	const themeColor = computed(() => (theme.value === "light" ? "#ffffff" : "#18181b"));
 
 	function toggleTheme() {
 		theme.value = theme.value === "light" ? "dark" : "light";
@@ -36,5 +37,5 @@ export const useTheme = () => {
 		}
 	}
 
-	return { theme, toggleTheme };
+	return { theme, themeColor, toggleTheme };
 };

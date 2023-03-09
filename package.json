@@ -16,6 +16,7 @@
 		"@commitlint/cli": "^17.4.4",
 		"@commitlint/config-conventional": "^17.4.4",
 		"@nuxt/eslint-config": "^0.1.1",
+		"@vite-pwa/nuxt": "^0.0.7",
 		"eslint": "^8.35.0",
 		"eslint-config-prettier": "^8.6.0",
 		"husky": "^8.0.3",

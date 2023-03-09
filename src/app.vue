@@ -9,9 +9,14 @@
 import { useHotkeys } from "./composables/useHotkeys";
 import { useSettings } from "./composables/useSettings";
 
+const { themeColor, toggleTheme } = useTheme();
+
 const router = useRouter();
 
-const { toggleTheme } = useTheme();
+useHead({
+	meta: [{ name: "theme-color", content: themeColor }],
+});
+
 const { settings } = useSettings();
 
 useHotkeys({
