@@ -10,7 +10,9 @@
 
 			<p :class="$style.info">
 				{{ item.points }} points by
-				<NuxtLink :to="`/user/${item.user}`">{{ item.user }}</NuxtLink> {{ item.time_ago }}
+				<NuxtLink :to="`/user/${item.user}`">{{ item.user }}</NuxtLink>
+				{{ item.time_ago }} | {{ item.comments_count }}
+				{{ item.comments_count === 1 ? "comment" : "comments" }}
 			</p>
 
 			<!-- eslint-disable-next-line vue/no-v-html -->
