@@ -1,5 +1,5 @@
 <template>
-	<NuxtLink :to="{ hash: `#${id}` }" :replace="true"><slot /></NuxtLink>
+	<NuxtLink :to="{ hash: `#comment-${id}` }" :replace="true"><slot /></NuxtLink>
 </template>
 
 <script setup lang="ts">
