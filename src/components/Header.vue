@@ -24,24 +24,52 @@
 				<component :is="theme == 'light' ? SunIcon : MoonIcon" />
 			</button>
 			<button
-				:class="$style.icon_button"
+				:class="[$style.icon_button, $style.icon_button__desktop]"
 				:title="settings.hotkeysEnabled ? 'Disable hotkeys' : 'Enable hotkeys'"
 				@click="settings.hotkeysEnabled = !settings.hotkeysEnabled"
 			>
 				<component :is="settings.hotkeysEnabled ? Keyboard : KeyboardOff" />
+			</button>
+			<button
+				v-if="shareUrl"
+				:class="[$style.icon_button, $style.icon_button__mobile]"
+				title="Share item"
+				@click="share"
+			>
+				<PaperAirplaneIcon />
 			</button>
 		</ClientOnly>
 	</header>
 </template>
 
 <script setup lang="ts">
-import { MoonIcon, SunIcon } from "@heroicons/vue/24/outline";
+import { MoonIcon, PaperAirplaneIcon, SunIcon } from "@heroicons/vue/24/outline";
 import { useSettings } from "../composables/useSettings";
 import KeyboardOff from "./icons/KeyboardOff.vue";
 import Keyboard from "./icons/Keyboard.vue";
 
 const { theme, toggleTheme } = useTheme();
 const { settings } = useSettings();
+
+const route = useRoute();
+
+const shareUrl = computed(() => {
+	if (route.name !== "item-id") {
+		return null;
+	}
+
+	if (!("share" in navigator)) {
+		return null;
+	}
+
+	return route.fullPath;
+});
+
+function share() {
+	if (shareUrl.value) {
+		navigator.share({ url: shareUrl.value });
+	}
+}
 </script>
 
 <style module lang="scss">
@@ -88,6 +116,20 @@ const { settings } = useSettings();
 
 	:global(.dark) &:hover {
 		background: var(--neutral-800);
+	}
+
+	&__mobile {
+		display: none;
+	}
+
+	@media (max-width: 639px) {
+		&__desktop {
+			display: none;
+		}
+
+		&__mobile {
+			display: block;
+		}
 	}
 }
 </style>
