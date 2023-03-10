@@ -151,6 +151,12 @@ function foldWithScroll() {
 		:global(.dark) &:hover {
 			border-color: var(--neutral-400);
 		}
+
+		@media (max-width: 639px) {
+			& {
+				min-width: var(--size-6);
+			}
+		}
 	}
 }
 </style>
