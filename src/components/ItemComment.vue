@@ -116,7 +116,8 @@ function foldWithScroll() {
 .content {
 	overflow-wrap: anywhere;
 
-	p {
+	p,
+	pre {
 		margin-block: var(--size-2);
 	}
 
