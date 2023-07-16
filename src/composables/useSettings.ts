@@ -25,7 +25,7 @@ export const useSettings = () => {
 		newSettings => {
 			localStorage.setItem(SETTINGS_KEY, JSON.stringify(newSettings));
 		},
-		{ deep: true }
+		{ deep: true },
 	);
 
 	return { settings };
