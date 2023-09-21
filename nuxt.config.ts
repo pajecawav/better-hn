@@ -32,7 +32,7 @@ export default defineNuxtConfig({
 				{ rel: "manifest", href: "/manifest.webmanifest" },
 			],
 			meta: [
-				{ name: "application-name", content: "Repeatable" },
+				{ name: "application-name", content: "Better HN" },
 				{ name: "description", content: "A Hacker News clone built with Nuxt 3" },
 				{ name: "theme-color", content: "#ffffff" },
 			],
