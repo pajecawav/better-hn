@@ -9,10 +9,6 @@ on:
 jobs:
     ci:
         runs-on: ubuntu-latest
-        strategy:
-            fail-fast: false
-            matrix:
-                script: [build, lint]
         steps:
             - uses: actions/checkout@v4
 
@@ -27,5 +23,8 @@ jobs:
 
             - run: pnpm install --frozen-lockfile
 
-            - name: ${{ matrix.script }}
-              run: pnpm ${{ matrix.script }}
+            - name: lint
+              run: pnpm lint
+
+            - name: build
+              run: pnpm build
