@@ -72,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-import { Comment } from "../lib/item";
+import type { Comment } from "../lib/item";
 
 const props = defineProps<{
 	comment: Comment;

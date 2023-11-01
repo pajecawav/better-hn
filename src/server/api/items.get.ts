@@ -1,4 +1,5 @@
-import { FeedItem, TOPICS } from "~~/src/lib/items";
+import type { FeedItem } from "~~/src/lib/items";
+import { TOPICS } from "~~/src/lib/items";
 
 export default defineEventHandler(async event => {
 	const query = getQuery(event);

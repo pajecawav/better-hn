@@ -1,4 +1,4 @@
-import { Item } from "~~/src/lib/item";
+import type { Item } from "~~/src/lib/item";
 
 export default defineEventHandler(async event => {
 	const id = event.context.params?.id as string;

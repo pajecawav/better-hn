@@ -1,4 +1,4 @@
-import { User } from "~~/src/lib/user";
+import type { User } from "~~/src/lib/user";
 
 export default defineEventHandler(async event => {
 	const name = event.context.params?.name as string;
