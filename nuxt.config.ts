@@ -14,7 +14,6 @@ export default defineNuxtConfig({
 		strict: true,
 		typeCheck: "build",
 	},
-
 	css: ["@/assets/main.css"],
 	app: {
 		head: {
