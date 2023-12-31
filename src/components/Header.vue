@@ -17,6 +17,22 @@
 
 		<ClientOnly>
 			<button
+				v-if="shareUrl"
+				:class="[$style.icon_button, $style.icon_button__mobile]"
+				title="Share item"
+				@click="share"
+			>
+				<PaperAirplaneIcon />
+			</button>
+			<a
+				:class="$style.icon_button"
+				title="Search Hacker News"
+				href="https://hn.algolia.com"
+				rel="noreferrer noopener"
+			>
+				<MagnifyingGlassIcon />
+			</a>
+			<button
 				:class="$style.icon_button"
 				:title="`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`"
 				@click="toggleTheme"
@@ -28,25 +44,31 @@
 				:title="settings.hotkeysEnabled ? 'Disable hotkeys' : 'Enable hotkeys'"
 				@click="settings.hotkeysEnabled = !settings.hotkeysEnabled"
 			>
-				<component :is="settings.hotkeysEnabled ? Keyboard : KeyboardOff" />
+				<component :is="settings.hotkeysEnabled ? KeyboardIcon : KeyboardOffIcon" />
 			</button>
-			<button
-				v-if="shareUrl"
-				:class="[$style.icon_button, $style.icon_button__mobile]"
-				title="Share item"
-				@click="share"
+			<a
+				:class="$style.icon_button"
+				title="Project source code"
+				href="https://github.com/pajecawav/better-hn"
+				rel="noreferrer noopener"
 			>
-				<PaperAirplaneIcon />
-			</button>
+				<GitHubIcon />
+			</a>
 		</ClientOnly>
 	</header>
 </template>
 
 <script setup lang="ts">
-import { MoonIcon, PaperAirplaneIcon, SunIcon } from "@heroicons/vue/24/outline";
+import {
+	MagnifyingGlassIcon,
+	MoonIcon,
+	PaperAirplaneIcon,
+	SunIcon,
+} from "@heroicons/vue/24/outline";
 import { useSettings } from "../composables/useSettings";
-import KeyboardOff from "./icons/KeyboardOff.vue";
-import Keyboard from "./icons/Keyboard.vue";
+import KeyboardOffIcon from "./icons/KeyboardOffIcon.vue";
+import KeyboardIcon from "./icons/KeyboardIcon.vue";
+import GitHubIcon from "./icons/GitHubIcon.vue";
 
 const { theme, toggleTheme } = useTheme();
 const { settings } = useSettings();
