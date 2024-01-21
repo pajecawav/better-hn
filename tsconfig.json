@@ -1,4 +1,4 @@
 {
 	"extends": "./.nuxt/tsconfig.json",
-	"compilerOptions": { "types": ["@vite-pwa/nuxt"] }
+	"compilerOptions": { "types": ["@vite-pwa/nuxt"] },
 }
