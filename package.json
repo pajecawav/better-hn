@@ -9,7 +9,7 @@
 		"lint:tsc": "nuxi typecheck",
 		"lint:format": "prettier . --check",
 		"format": "prettier . --write",
-		"prepare": "husky install",
+		"prepare": "husky",
 		"postinstall": "nuxt prepare"
 	},
 	"devDependencies": {
