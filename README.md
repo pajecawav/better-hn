@@ -1,42 +1,7 @@
-# Nuxt 3 Minimal Starter
+# Better HN
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+An alternative frontend for Hacker News available at [bhn.vercel.app](https://bhn.vercel.app).
 
-## Setup
+[![Screenshot](https://github.com/pajecawav/better-hn/assets/18193831/919c829e-6adf-4714-8cea-6b34b067af9c)](https://bhn.vercel.app)
 
-Make sure to install the dependencies:
-
-```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install
-```
-
-## Development Server
-
-Start the development server on http://localhost:3000
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+[![Screenshot](https://github.com/pajecawav/better-hn/assets/18193831/b5c412a0-0f33-4096-85aa-f2817156b696)](https://bhn.vercel.app)
