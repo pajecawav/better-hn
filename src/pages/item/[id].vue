@@ -123,6 +123,10 @@ useHotkeys({
 		text-decoration: underline;
 	}
 
+	pre {
+		overflow-x: auto;
+	}
+
 	:global(.dark) & {
 		border-color: var(--neutral-700);
 	}
