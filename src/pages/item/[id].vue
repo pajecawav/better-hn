@@ -45,42 +45,6 @@ function formatUrl(url: string): string {
 	if (url.startsWith("http")) return url;
 	return `/item/${id}`;
 }
-
-function getSelectedComment() {
-	return document.activeElement?.closest<HTMLElement>(".comment") ?? null;
-}
-
-function focusCommentById(id: string | number | undefined) {
-	if (id) {
-		const element = document.querySelector<HTMLElement>(`#comment-${id} .commentBody`);
-		element?.focus();
-		element?.scrollIntoView({ block: "start" });
-	}
-}
-
-function selectComment(direction: "next" | "prev" | "parent" | "child" | "root") {
-	const comment = getSelectedComment();
-	if (comment) {
-		const id = comment?.dataset[`${direction}id`];
-		focusCommentById(id);
-	} else if (direction === "next") {
-		focusCommentById(item.value?.comments[0].id);
-	}
-}
-
-function toggleFoldComment() {
-	const comment = getSelectedComment();
-	comment?.querySelector<HTMLElement>(".foldToggle")?.click();
-}
-
-useHotkeys({
-	j: () => selectComment("next"),
-	k: () => selectComment("prev"),
-	h: () => selectComment("parent"),
-	l: () => selectComment("child"),
-	r: () => selectComment("root"),
-	f: toggleFoldComment,
-});
 </script>
 
 <style module lang="scss">
