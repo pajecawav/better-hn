@@ -1,9 +1,9 @@
 <template>
-	<ErrorMessage v-if="!data">Failed to load items.</ErrorMessage>
+	<ErrorMessage v-if="!items">Failed to load items.</ErrorMessage>
 
 	<template v-else>
 		<div :class="$style.list">
-			<template v-for="(item, index) of data.items" :key="item.id">
+			<template v-for="(item, index) of items" :key="item.id">
 				<span :class="$style.index">{{ startIndex + index }}</span>
 				<div :class="[$style.item, 'item']" :tabindex="-1" @focusin="selectedIndex = index">
 					<h2>
@@ -32,33 +32,33 @@
 			</template>
 		</div>
 
-		<NuxtLink
-			:to="{ path: `/${data.topic}`, query: { page: data.page + 1 } }"
-			:class="$style.moreLink"
+		<NuxtLink :to="{ path: `/${topic}`, query: { page: page + 1 } }" :class="$style.moreLink"
 			>More...</NuxtLink
 		>
 	</template>
 </template>
 
 <script setup lang="ts">
-import { TOPICS } from "../lib/items";
+import { TOPICS, type FeedItem } from "../lib/items";
 
 definePageMeta({
-	validate: route => {
-		return Object.keys(TOPICS).includes(route.params.topic as string);
-	},
-	key: route => route.fullPath,
 	scrollToTop: true,
 });
 
 const ITEMS_PER_PAGE = 30;
 
 const route = useRoute();
+const topic = TOPICS[route.params.topic as keyof typeof TOPICS];
+const page = Math.max(1, +(route.query.page ?? "1") || 1);
 
-const { data } = await useFetch("/api/items", {
-	params: computed(() => ({ topic: route.params.topic, page: route.query.page })),
-});
-const startIndex = computed(() => 1 + ((data.value?.page ?? 1) - 1) * ITEMS_PER_PAGE);
+if (!topic) {
+	throw createError({ statusCode: 404 });
+}
+
+const { data: items } = await useFetch<FeedItem[]>(
+	`https://api.hnpwa.com/v0/${topic}/${page}.json`,
+);
+const startIndex = computed(() => 1 + (page - 1) * ITEMS_PER_PAGE);
 
 const selectedIndex = ref<number>(-1);
 </script>

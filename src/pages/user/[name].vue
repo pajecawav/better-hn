@@ -27,6 +27,8 @@
 </template>
 
 <script setup lang="ts">
+import type { User } from "~/lib/user";
+
 definePageMeta({
 	key: route => route.params.name as string,
 	alias: ["/u/:name"],
@@ -34,7 +36,9 @@ definePageMeta({
 
 const route = useRoute();
 
-const { data: user } = await useFetch(`/api/users/${route.params.name}`);
+const { data: user } = await useFetch<User>(
+	`https://api.hnpwa.com/v0/user/${route.params.name}.json`,
+);
 
 useHead({ title: user.value?.id });
 </script>

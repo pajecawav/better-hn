@@ -31,13 +31,15 @@
 </template>
 
 <script setup lang="ts">
+import type { Item } from "~/lib/item";
+
 definePageMeta({
 	key: route => route.params.id as string,
 });
 
 const route = useRoute();
 const id = route.params.id as string;
-const { data: item } = await useFetch(`/api/items/${id}`);
+const { data: item } = await useFetch<Item>(`https://api.hnpwa.com/v0/item/${id}.json`);
 
 useHead({ title: () => item.value?.title ?? null });
 
