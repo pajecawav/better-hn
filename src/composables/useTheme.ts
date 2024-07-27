@@ -3,7 +3,7 @@ type Theme = "light" | "dark";
 const THEME_KEY = "bhn.theme";
 
 function getTheme(): Theme | undefined {
-	if (process.server) {
+	if (import.meta.server) {
 		return undefined;
 	}
 
