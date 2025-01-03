@@ -9,13 +9,13 @@ importers:
   .:
     devDependencies:
       '@commitlint/cli':
-        specifier: ^19.4.0
+        specifier: ^19.6.1
         version: 19.6.1(@types/node@22.10.3)(typescript@5.7.2)
       '@commitlint/config-conventional':
-        specifier: ^19.2.2
+        specifier: ^19.6.0
         version: 19.6.0
       '@heroicons/vue':
-        specifier: ^2.1.5
+        specifier: ^2.2.0
         version: 2.2.0(vue@3.5.13(typescript@5.7.2))
       '@nuxt/eslint-config':
         specifier: ^0.7.4
@@ -27,16 +27,16 @@ importers:
         specifier: ^0.10.6
         version: 0.10.6(magicast@0.3.5)(rollup@4.29.1)(vite@6.0.6(@types/node@22.10.3)(jiti@2.4.2)(sass@1.83.0)(terser@5.37.0)(yaml@2.7.0))(workbox-build@7.3.0)(workbox-window@7.3.0)
       eslint:
-        specifier: ^9.9.0
+        specifier: ^9.17.0
         version: 9.17.0(jiti@2.4.2)
       eslint-config-prettier:
         specifier: ^9.1.0
         version: 9.1.0(eslint@9.17.0(jiti@2.4.2))
       husky:
-        specifier: ^9.1.4
+        specifier: ^9.1.7
         version: 9.1.7
       lint-staged:
-        specifier: ^15.2.9
+        specifier: ^15.3.0
         version: 15.3.0
       npm-run-all:
         specifier: ^4.1.5
@@ -45,16 +45,16 @@ importers:
         specifier: ^3.15.0
         version: 3.15.0(@parcel/watcher@2.5.0)(@types/node@22.10.3)(db0@0.2.1)(eslint@9.17.0(jiti@2.4.2))(ioredis@5.4.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.29.1)(sass@1.83.0)(terser@5.37.0)(typescript@5.7.2)(vite@6.0.6(@types/node@22.10.3)(jiti@2.4.2)(sass@1.83.0)(terser@5.37.0)(yaml@2.7.0))(vue-tsc@2.2.0(typescript@5.7.2))(yaml@2.7.0)
       prettier:
-        specifier: ^3.3.3
+        specifier: ^3.4.2
         version: 3.4.2
       sass:
-        specifier: ^1.77.8
+        specifier: ^1.83.0
         version: 1.83.0
       tailwind-vars:
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: 0.1.6
       vue-tsc:
-        specifier: ^2.0.29
+        specifier: ^2.2.0
         version: 2.2.0(typescript@5.7.2)
 
 packages:
