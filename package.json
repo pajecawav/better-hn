@@ -16,7 +16,7 @@
 		"@commitlint/cli": "^19.4.0",
 		"@commitlint/config-conventional": "^19.2.2",
 		"@heroicons/vue": "^2.1.5",
-		"@nuxt/eslint-config": "^0.7.4",
+		"@nuxt/eslint-config": "^1.2.0",
 		"@pajecawav/prettier-config": "^1.0.0",
 		"@vercel/analytics": "^1.4.1",
 		"@vite-pwa/nuxt": "^0.10.6",
