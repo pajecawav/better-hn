@@ -1,0 +1,28 @@
+@import "tailwind-vars";
+@import "tailwind-vars/dist/preflight.css";
+
+@import "./layout.scss";
+@import "./header.scss";
+@import "./topic.scss";
+@import "./user.scss";
+@import "./post.scss";
+@import "./comment.scss";
+
+html {
+	scrollbar-gutter: stable;
+	color-scheme: light;
+
+	background: var(--bg);
+
+	--bg: #fff;
+}
+
+html.dark {
+	--bg: var(--zinc-900);
+	color: #fff;
+	color-scheme: dark;
+}
+
+body {
+	padding: 0 var(--size-2) var(--size-4);
+}

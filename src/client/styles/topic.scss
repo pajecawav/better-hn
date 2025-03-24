@@ -1,0 +1,42 @@
+.feed {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	row-gap: var(--size-4);
+	column-gap: var(--size-6);
+
+	font-size: var(--font-size-lg);
+
+	.index {
+		font-size: var(--font-size-2xl);
+		text-align: right;
+	}
+
+	.item {
+		min-width: 0;
+	}
+
+	.link:visited,
+	.index,
+	.domain,
+	.info {
+		color: var(--neutral-400);
+	}
+
+	.link {
+		overflow-wrap: break-word;
+	}
+
+	.info {
+		margin-top: var(--size-1);
+
+		a {
+			text-decoration: underline;
+		}
+	}
+}
+
+.more {
+	display: block;
+	margin-top: var(--size-4);
+	text-decoration: underline;
+}

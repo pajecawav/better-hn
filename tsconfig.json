@@ -1,4 +1,3 @@
 {
-	"extends": "./.nuxt/tsconfig.json",
-	"compilerOptions": { "types": ["@vite-pwa/nuxt"] }
+	"extends": "./.nitro/types/tsconfig.json"
 }

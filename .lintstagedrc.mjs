@@ -1,5 +1,5 @@
+/** @type {import("lint-staged").Config} */
 export default {
-	"*.{vue,js,ts,cjs,cts,json,md,yml,css}": filenames =>
-		`prettier --write ${filenames.map(filename => `'${filename}'`).join(" ")}`,
-	"src/**/*.{vue,js,jsx,ts,tsx}": [() => "pnpm lint:tsc", "eslint"],
+	"*.{js,jsx,ts,tsx,cjs,cts,json,md,yml,css}": "prettier --write",
+	"src/**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}": [() => "pnpm lint:tsc", "eslint"],
 };

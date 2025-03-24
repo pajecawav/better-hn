@@ -1,0 +1,49 @@
+.post {
+	.item {
+		margin-bottom: var(--size-4);
+
+		& p:not(.info) {
+			margin-block: var(--size-2);
+		}
+	}
+
+	.title {
+		font-size: var(--font-size-2xl);
+		font-weight: 500;
+		display: inline;
+	}
+
+	.domain {
+		font-size: var(--font-size-xl);
+	}
+
+	.domain,
+	.info {
+		color: var(--neutral-400);
+	}
+
+	.info {
+		margin-top: var(--size-1);
+
+		a {
+			text-decoration: underline;
+		}
+	}
+
+	.content {
+		overflow-wrap: break-word;
+		border-bottom: 2px solid var(--neutral-200);
+
+		a {
+			text-decoration: underline;
+		}
+
+		pre {
+			overflow-x: auto;
+		}
+	}
+}
+
+.dark .post .content {
+	border-color: var(--neutral-700);
+}
