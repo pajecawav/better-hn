@@ -29,6 +29,7 @@ export default defineConfig({
 	appType: "mpa",
 	build: {
 		manifest: true,
+		outDir: "dist-vite",
 		rollupOptions: {
 			input: "./src/client/index.ts",
 		},
