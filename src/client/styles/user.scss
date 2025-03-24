@@ -1,0 +1,26 @@
+.user {
+	.name {
+		font-size: var(--font-size-2xl);
+		font-weight: 600;
+	}
+
+	.info {
+		display: grid;
+		grid-template-columns: max-content 1fr;
+		column-gap: var(--size-2);
+	}
+
+	.links {
+		margin-block: var(--size-4);
+
+		a {
+			text-decoration: underline;
+		}
+	}
+
+	.about {
+		p {
+			margin-block: var(--size-4);
+		}
+	}
+}
