@@ -55,7 +55,7 @@ export const Header = () => {
 			<a
 				className="iconButton iconButton__desktop"
 				title="Project source code"
-				href="https://github.com/pajecawav/better-hn-nitro"
+				href="https://github.com/pajecawav/better-hn"
 				rel="noreferrer noopener"
 			>
 				<GitHubIcon />
