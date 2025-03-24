@@ -10,17 +10,17 @@ export default defineNitroConfig({
 	publicAssets: [
 		{
 			baseURL: "assets",
-			dir: "../dist/assets",
+			dir: "../dist-vite/assets",
 			maxAge: 365 * 24 * 60 * 60,
 		},
 		{
-			dir: "../dist",
+			dir: "../dist-vite",
 		},
 	],
 	serverAssets: [
 		{
 			baseName: "vite",
-			dir: "../dist/.vite",
+			dir: "../dist-vite/.vite",
 		},
 	],
 	routeRules: {
