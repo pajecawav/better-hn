@@ -37,7 +37,7 @@
 		"tailwind-vars": "^0.1.6",
 		"tiny-server-timing": "^0.1.5",
 		"typescript-eslint": "^8.27.0",
-		"vite": "^6.2.2",
+		"vite": "^6.2.3",
 		"vite-plugin-pwa": "^0.21.2"
 	}
 }
