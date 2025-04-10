@@ -39,5 +39,6 @@
 		"typescript-eslint": "^8.29.1",
 		"vite": "^6.2.6",
 		"vite-plugin-pwa": "^1.0.0"
-	}
+	},
+	"packageManager": "pnpm@10.8.0"
 }
