@@ -10,6 +10,7 @@ const prefetch = (el: HTMLAnchorElement) => {
 	const link = document.createElement("link");
 	link.href = href;
 	link.rel = "prefetch";
+	link.as = "document";
 	document.head.appendChild(link);
 
 	delete el.dataset.prefetch;
