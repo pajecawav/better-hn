@@ -1,6 +1,6 @@
 import { EventHandlerRequest, H3Event } from "h3";
 import { Child } from "hono/jsx";
-import { renderToString } from "hono/jsx/dom/server";
+import { renderToReadableStream } from "hono/jsx/dom/server";
 import { ServerTiming } from "tiny-server-timing";
 import { getAssets } from "./assets";
 import { App } from "./components/App";
@@ -18,29 +18,37 @@ export const renderPage = async (page: Child, { title, timing, event }: RenderPa
 
 	const assets = await getAssets();
 
-	const theme = (getCookie(event, THEME_COOKIE) ?? DEFAULT_THEME) as Theme;
+	// TODO: 103 early hints?
+	// const hints = [
+	// 	...assets.scripts.map(script => `<${script}>; rel=preload; as=script`),
+	// 	...assets.css.map(css => `<${css}>; rel=preload; as=style`),
+	// ];
 
-	// TODO: 103 early hints
+	// writeEarlyHints(event, {
+	// 	link: hints,
+	// });
+
+	const theme = (getCookie(event, THEME_COOKIE) ?? DEFAULT_THEME) as Theme;
 
 	const context: SSRContextValue = {
 		url: getRequestURL(event),
 		title,
 		assets,
 		theme,
+		timing,
 	};
 
-	const html = renderToString(
+	setHeader(event, "Content-Type", "text/html, charset=UTF-8");
+
+	event.node.res.write("<!DOCTYPE html>");
+
+	// TODO: server-timing
+	// timing.end("render");
+	// setHeaders(event, timing.getHeaders());
+
+	return renderToReadableStream(
 		<SSRContext.Provider value={context}>
 			<App>{page}</App>
 		</SSRContext.Provider>,
 	);
-
-	timing.end("render");
-
-	setHeaders(event, timing.getHeaders());
-
-	return `
-<!DOCTYPE html>
-${html}
-`;
 };
