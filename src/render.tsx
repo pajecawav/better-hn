@@ -1,8 +1,9 @@
 import { EventHandlerRequest, H3Event } from "h3";
-import { Child } from "hono/jsx";
-import { renderToString } from "hono/jsx/dom/server";
+import { html, raw } from "hono/html";
+import { Child, jsx } from "hono/jsx";
+import { renderToReadableStream } from "hono/jsx/dom/server";
 import { ServerTiming } from "tiny-server-timing";
-import { getAssets } from "./assets";
+import { getAssets, sendEarlyHints } from "./assets";
 import { App } from "./components/App";
 import { SSRContext, SSRContextValue } from "./lib/context";
 import { DEFAULT_THEME, Theme, THEME_COOKIE } from "./lib/theme";
@@ -18,29 +19,45 @@ export const renderPage = async (page: Child, { title, timing, event }: RenderPa
 
 	const assets = await getAssets();
 
-	const theme = (getCookie(event, THEME_COOKIE) ?? DEFAULT_THEME) as Theme;
+	sendEarlyHints(event, assets);
 
-	// TODO: 103 early hints
+	const theme = (getCookie(event, THEME_COOKIE) ?? DEFAULT_THEME) as Theme;
 
 	const context: SSRContextValue = {
 		url: getRequestURL(event),
 		title,
 		assets,
 		theme,
+		timing,
 	};
 
-	const html = renderToString(
-		<SSRContext.Provider value={context}>
-			<App>{page}</App>
-		</SSRContext.Provider>,
+	setHeader(event, "Content-Type", "text/html; charset=UTF-8");
+
+	// TODO: server-timing
+	// timing.end("render");
+	// setHeaders(event, timing.getHeaders());
+
+	// setHeader(event, "Content-Encoding", "gzip");
+	// const compression = new CompressionStream("gzip");
+
+	// TODO: wtf is this
+	// const writer = compression.writable.getWriter();
+	// await writer.ready;
+	// await writer.write(new TextEncoder().encode("<!DOCTYPE html>"));
+	// await writer.ready;
+	// await writer.releaseLock();
+
+	// const stream = await renderToReadableStream(
+	// 	<SSRContext.Provider value={context}>
+	// 		<App>{page}</App>
+	// 	</SSRContext.Provider>,
+	// );
+
+	// return stream;
+
+	const docType = raw("<!DOCTYPE html>");
+
+	return renderToReadableStream(
+		html`${docType}${jsx(SSRContext.Provider, { value: context }, (<App>{page}</App>) as any)}`,
 	);
-
-	timing.end("render");
-
-	setHeaders(event, timing.getHeaders());
-
-	return `
-<!DOCTYPE html>
-${html}
-`;
 };

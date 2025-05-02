@@ -1,12 +1,14 @@
 import { createContext, useContext } from "hono/jsx";
-import { Theme } from "./theme";
+import { ServerTiming } from "tiny-server-timing";
 import { Assets } from "~/assets";
+import { Theme } from "./theme";
 
 export interface SSRContextValue {
 	url: URL;
 	title: string;
 	assets: Assets;
 	theme?: Theme;
+	timing: ServerTiming;
 }
 
 export const SSRContext = createContext<SSRContextValue | null>(null);
