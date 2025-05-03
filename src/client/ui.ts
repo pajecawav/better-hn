@@ -30,3 +30,5 @@ const updateTheme = () => {
 window.addEventListener("pageshow", () => {
 	updateTheme();
 });
+
+updateTheme();
