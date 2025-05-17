@@ -2,7 +2,7 @@ export default defineNitroConfig({
 	srcDir: "src",
 	errorHandler: "~/error",
 	compatibilityDate: "2024-12-30",
-	preset: process.env.VERCEL ? "vercel-edge" : undefined,
+	preset: process.env.VERCEL ? "vercel" : undefined,
 	compressPublicAssets: {
 		gzip: true,
 		brotli: true,
