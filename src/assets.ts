@@ -1,3 +1,4 @@
+import { EventHandlerRequest, H3Event } from "h3";
 import { type Manifest } from "vite";
 
 export interface Assets {
@@ -21,4 +22,15 @@ export const getAssets = async (): Promise<Assets> => {
 	const scripts = [`/${entryChunk.file}`];
 
 	return { css, scripts };
+};
+
+export const sendEarlyHints = async (event: H3Event<EventHandlerRequest>) => {
+	const assets = await getAssets();
+
+	const hints = [
+		...assets.scripts.map(script => `<${script}>; rel=preload; as=script`),
+		...assets.css.map(css => `<${css}>; rel=preload; as=style`),
+	];
+
+	writeEarlyHints(event, hints);
 };
