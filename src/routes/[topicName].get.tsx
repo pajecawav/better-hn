@@ -1,4 +1,5 @@
 import { ServerTiming } from "tiny-server-timing";
+import { sendEarlyHints } from "~/assets";
 import { FeedItem } from "~/components/FeedItem";
 import { TOPICS, TopicItem } from "~/lib/topic";
 import { renderPage } from "~/render";
@@ -16,6 +17,8 @@ export default defineEventHandler(async event => {
 	}
 
 	setHeader(event, "cache-control", "public, max-age=60, stale-while-revalidate=10");
+
+	await sendEarlyHints(event);
 
 	const timing = new ServerTiming();
 

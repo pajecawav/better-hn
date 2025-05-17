@@ -20,8 +20,6 @@ export const renderPage = async (page: Child, { title, timing, event }: RenderPa
 
 	const theme = (getCookie(event, THEME_COOKIE) ?? DEFAULT_THEME) as Theme;
 
-	// TODO: 103 early hints
-
 	const context: SSRContextValue = {
 		url: getRequestURL(event),
 		title,
