@@ -3,7 +3,7 @@ import { Link } from "~/components/Link";
 import { User } from "~/lib/user";
 import { renderPage } from "~/render";
 
-export default eventHandler(async event => {
+export default defineEventHandler(async event => {
 	const userName = getRouterParam(event, "userName");
 
 	const timing = new ServerTiming();

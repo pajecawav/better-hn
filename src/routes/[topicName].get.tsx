@@ -5,7 +5,7 @@ import { renderPage } from "~/render";
 
 const ITEMS_PER_PAGE = 30;
 
-export default eventHandler(async event => {
+export default defineEventHandler(async event => {
 	const topicName = getRouterParam(event, "topicName");
 	const topic = TOPICS.find(t => t.name === topicName);
 	const page = Number(getQuery(event).page ?? "1");

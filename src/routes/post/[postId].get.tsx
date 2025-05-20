@@ -5,7 +5,7 @@ import { replaceHnPostLinks } from "~/lib/link";
 import { Post } from "~/lib/post";
 import { renderPage } from "~/render";
 
-export default eventHandler(async event => {
+export default defineEventHandler(async event => {
 	const postId = Number(getRouterParam(event, "postId"));
 
 	if (Number.isNaN(postId)) {
