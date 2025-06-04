@@ -1,9 +1,9 @@
-import { PropsWithChildren } from "hono/jsx";
+import { FC, PropsWithChildren } from "hono/jsx";
 import { useSSRContext } from "~/lib/context";
 import { Layout } from "./Layout";
 import { Meta } from "./Meta";
 
-export const App = ({ children }: PropsWithChildren) => {
+export const App: FC = ({ children }: PropsWithChildren) => {
 	const { theme } = useSSRContext();
 
 	return (

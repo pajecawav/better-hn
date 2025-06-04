@@ -1,9 +1,37 @@
 import { ServerTiming } from "tiny-server-timing";
 import { FeedItem } from "~/components/FeedItem";
-import { TOPICS, TopicItem } from "~/lib/topic";
+import { useSSRContext } from "~/lib/context";
+import { AvailableTopic, TOPICS, TopicItem } from "~/lib/topic";
 import { renderPage } from "~/render";
 
 const ITEMS_PER_PAGE = 30;
+
+interface TopicPageProps {
+	topic: AvailableTopic;
+	page: number;
+}
+
+const TopicPage = async ({ topic, page }: TopicPageProps) => {
+	const { timing } = useSSRContext();
+
+	const items = await timing.timeAsync("fetch", () =>
+		$fetch<TopicItem[]>(`https://api.hnpwa.com/v0/${topic.value}/${page}.json`),
+	);
+
+	return (
+		<>
+			<div className="feed">
+				{items.map((item, index) => (
+					<FeedItem item={item} index={index + 1 + ITEMS_PER_PAGE * (page - 1)} />
+				))}
+			</div>
+
+			<a className="more" href={`/${topic.name}?page=${page + 1}`}>
+				More...
+			</a>
+		</>
+	);
+};
 
 export default defineEventHandler(async event => {
 	const topicName = getRouterParam(event, "topicName");
@@ -17,22 +45,5 @@ export default defineEventHandler(async event => {
 
 	const timing = new ServerTiming();
 
-	const items = await timing.timeAsync("fetch", () =>
-		$fetch<TopicItem[]>(`https://api.hnpwa.com/v0/${topic.value}/${page}.json`),
-	);
-
-	return renderPage(
-		<>
-			<div className="feed">
-				{items.map((item, index) => (
-					<FeedItem item={item} index={index + 1 + ITEMS_PER_PAGE * (page - 1)} />
-				))}
-			</div>
-
-			<a className="more" href={`/${topic.name}?page=${page + 1}`}>
-				More...
-			</a>
-		</>,
-		{ event, timing },
-	);
+	return renderPage(<TopicPage topic={topic} page={page} />, { event, timing });
 });
