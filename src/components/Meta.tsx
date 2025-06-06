@@ -26,6 +26,11 @@ export const Meta = () => {
 			{assets.scripts.map(href => (
 				<script type="module" src={href} />
 			))}
+
+			<meta
+				name="google-site-verification"
+				content="FnhvmqWUsfbh_7kFL_8bcS5_wOYRnaQD1dY4IB3WT7s"
+			/>
 		</head>
 	);
 };
