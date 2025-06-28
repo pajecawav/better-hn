@@ -1,10 +1,10 @@
 {
 	"private": true,
 	"scripts": {
-		"build": "cross-env FORCE_COLOR=1 run-s -l build:vite build:nitro",
+		"build": "cross-env FORCE_COLOR=1 run-s -l prepare:nitro build:vite build:nitro",
 		"build:vite": "vite build",
 		"build:nitro": "nitro build",
-		"dev": "cross-env FORCE_COLOR=1 run-p -l dev:*",
+		"dev": "cross-env FORCE_COLOR=1 npm-run-all -l -s prepare:nitro -p dev:*",
 		"dev:vite": "vite --watch build",
 		"dev:nitro": "cross-env NODE_OPTIONS=--enable-source-maps nitro dev",
 		"preview": "cross-env NODE_OPTIONS=--enable-source-maps node .output/server/index.mjs",
@@ -13,8 +13,10 @@
 		"lint:tsc": "tsc --noEmit",
 		"lint:format": "prettier . --check",
 		"format": "prettier . --write",
-		"clean": "rimraf .nitro .output",
-		"prepare": "husky && nitropack prepare"
+		"clean": "rimraf dist dist-vite .nitro .output .vercel node_modules/.cache",
+		"prepare": "cross-env FORCE_COLOR=1 run-s prepare:*",
+		"prepare:husky": "husky",
+		"prepare:nitro": "nitropack prepare"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^19.8.1",
