@@ -34,13 +34,6 @@ export default defineConfig({
 			input: "./src/client/index.ts",
 		},
 	},
-	css: {
-		preprocessorOptions: {
-			scss: {
-				api: "modern",
-			},
-		},
-	},
 	plugins: [
 		VitePWA({
 			manifest: pwaManifest,
