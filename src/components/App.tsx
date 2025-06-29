@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "hono/jsx";
 import { useSSRContext } from "~/lib/context";
+import { InlineScript } from "./InlineScript";
 import { Layout } from "./Layout";
 import { Meta } from "./Meta";
 
@@ -11,15 +12,7 @@ export const App = ({ children }: PropsWithChildren) => {
 			<Meta />
 
 			<body>
-				<script
-					dangerouslySetInnerHTML={{
-						__html: `
-                            if (!("share" in navigator)) {
-                                document.body.classList.add("noshare");
-                            }
-                    `,
-					}}
-				/>
+				<InlineScript />
 
 				<Layout>{children}</Layout>
 			</body>

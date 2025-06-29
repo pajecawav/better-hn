@@ -14,7 +14,7 @@
 		"lint:format": "prettier . --check",
 		"format": "prettier . --write",
 		"clean": "rimraf dist dist-vite .nitro .output .vercel node_modules/.cache",
-		"prepare": "cross-env FORCE_COLOR=1 run-s prepare:*",
+		"prepare": "cross-env FORCE_COLOR=1 run-s -l prepare:*",
 		"prepare:husky": "husky",
 		"prepare:nitro": "nitropack prepare"
 	},

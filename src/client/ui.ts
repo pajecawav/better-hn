@@ -20,8 +20,8 @@ const updateTheme = () => {
 (window as any).UI = {
 	switchTheme() {
 		const newTheme: Theme = document.documentElement.classList.contains("dark")
-			? "light"
-			: "dark";
+			? Theme.LIGHT
+			: Theme.DARK;
 
 		setTheme(newTheme);
 	},
