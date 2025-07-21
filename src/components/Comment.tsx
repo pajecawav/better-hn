@@ -16,15 +16,7 @@ export const Comment = ({ comment, rootId, parentId, prevId, nextId }: CommentPr
 	const content = replaceHnPostLinks(comment.content);
 
 	return (
-		<article
-			id={`comment-${comment.id}`}
-			class="comment"
-			// data-rootid={rootId}
-			// data-parentid={parentId}
-			// data-nextid={nextId}
-			// data-previd={prevId}
-			// data-childid={comment.comments[0]?.id ?? undefined}
-		>
+		<article id={`comment-${comment.id}`} class="comment">
 			<div class="commentBody" tabindex={-1}>
 				<p class="info">
 					{comment.user && (

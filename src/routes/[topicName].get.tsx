@@ -18,7 +18,8 @@ export default defineEventHandler(async event => {
 	const timing = new ServerTiming();
 
 	const items = await timing.timeAsync("fetch", () =>
-		$fetch<TopicItem[]>(`https://api.hnpwa.com/v0/${topic.value}/${page}.json`),
+		// $fetch<TopicItem[]>(`https://api.hnpwa.com/v0/${topic.value}/${page}.json`),
+		$fetch<TopicItem[]>(`https://api.hackerwebapp.com/${topic.value}?page=${page}.json`),
 	);
 
 	return renderPage(
