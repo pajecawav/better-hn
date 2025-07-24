@@ -1,4 +1,5 @@
 import { ServerTiming } from "tiny-server-timing";
+import { sendEarlyHints } from "~/assets";
 import { Comment } from "~/components/Comment";
 import { Link } from "~/components/Link";
 import { replaceHnPostLinks } from "~/lib/link";
@@ -11,6 +12,8 @@ export default defineEventHandler(async event => {
 	if (Number.isNaN(postId)) {
 		throw createError({ statusCode: 404, message: "Post not found" });
 	}
+
+	await sendEarlyHints(event);
 
 	const timing = new ServerTiming();
 

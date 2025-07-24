@@ -1,4 +1,5 @@
 import { ServerTiming } from "tiny-server-timing";
+import { sendEarlyHints } from "~/assets";
 import { FeedItem } from "~/components/FeedItem";
 import { TOPICS, TopicItem } from "~/lib/topic";
 import { renderPage } from "~/render";
@@ -14,6 +15,8 @@ export default defineEventHandler(async event => {
 	if (!topic || Number.isNaN(page) || page < 1) {
 		throw createError({ statusCode: 404, message: "Unknown topic" });
 	}
+
+	await sendEarlyHints(event);
 
 	const timing = new ServerTiming();
 
