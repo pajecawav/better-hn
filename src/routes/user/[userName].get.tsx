@@ -6,6 +6,8 @@ import { renderPage } from "~/render";
 export default defineEventHandler(async event => {
 	const userName = getRouterParam(event, "userName");
 
+	setHeader(event, "cache-control", "public, max-age=60, stale-while-revalidate=10");
+
 	const timing = new ServerTiming();
 
 	const user = await timing.timeAsync("fetch", () =>
