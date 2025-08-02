@@ -12,6 +12,8 @@ export default defineEventHandler(async event => {
 		throw createError({ statusCode: 404, message: "Post not found" });
 	}
 
+	setHeader(event, "cache-control", "public, max-age=60, stale-while-revalidate=10");
+
 	const timing = new ServerTiming();
 
 	const post = await timing.timeAsync("fetch", () =>

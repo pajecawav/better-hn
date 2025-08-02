@@ -25,9 +25,9 @@ export default defineNitroConfig({
 	],
 	routeRules: {
 		"/": { redirect: "/top" },
-		"/*": { cache: { maxAge: 60 } },
-		"/post/*": { cache: { maxAge: 60 } },
-		"/user/*": { cache: { maxAge: 60 } },
+		// "/*": { cache: { maxAge: 60 } },
+		// "/post/*": { cache: { maxAge: 60 } },
+		// "/user/*": { cache: { maxAge: 60 } },
 	},
 	typescript: {
 		tsConfig: {
