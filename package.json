@@ -27,7 +27,7 @@
 		"@vercel/analytics": "^1.5.0",
 		"cross-env": "^10.0.0",
 		"eslint": "^9.34.0",
-		"hono": "^4.9.4",
+		"hono": "^4.9.6",
 		"husky": "^9.1.7",
 		"js-cookie": "^3.0.5",
 		"lint-staged": "^16.1.5",
