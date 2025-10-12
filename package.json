@@ -19,8 +19,8 @@
 		"prepare:nitro": "nitropack prepare"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^19.8.1",
-		"@commitlint/config-conventional": "^19.8.1",
+		"@commitlint/cli": "^20.1.0",
+		"@commitlint/config-conventional": "^20.0.0",
 		"@eslint/js": "^9.37.0",
 		"@pajecawav/prettier-config": "^1.0.0",
 		"@types/js-cookie": "^3.0.6",
