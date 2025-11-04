@@ -23,8 +23,20 @@ jobs:
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
 
-            - name: Build
+            - name: Build for Node
               run: pnpm build
 
             - name: Lint
               run: pnpm lint
+
+            - name: Build for Deno
+              run: pnpm build:nitro
+              env:
+                  NITRO_PRESET: deno_deploy
+
+            - name: Deploy to Deno Deploy
+              uses: denoland/deployctl@v1
+              with:
+                  project: bhn
+                  entrypoint: server/index.ts
+                  root: .output
