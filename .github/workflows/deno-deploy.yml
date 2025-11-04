@@ -1,4 +1,4 @@
-name: CI
+name: Deno Deploy
 
 on:
     push:
@@ -9,6 +9,8 @@ on:
 jobs:
     ci:
         runs-on: ubuntu-latest
+        permissions:
+            id-token: write
 
         steps:
             - uses: actions/checkout@v5
@@ -23,8 +25,14 @@ jobs:
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
 
-            - name: Build for Node
+            - name: Build for Deno
               run: pnpm build
+              env:
+                  NITRO_PRESET: deno_deploy
 
-            - name: Lint
-              run: pnpm lint
+            - name: Deploy to Deno Deploy
+              uses: denoland/deployctl@v1
+              with:
+                  project: bhn
+                  entrypoint: server/index.ts
+                  root: .output
