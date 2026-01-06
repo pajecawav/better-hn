@@ -1,28 +1,18 @@
 import { ServerTiming } from "tiny-server-timing";
 import { FeedItem } from "~/components/FeedItem";
-import { TOPICS, TopicItem } from "~/lib/topic";
+import { fetchTopic, parseTopicParams } from "~/lib/topic";
 import { renderPage } from "~/render";
 
 const ITEMS_PER_PAGE = 30;
 
 export default defineEventHandler(async event => {
-	const topicName = getRouterParam(event, "topicName");
-	const topic = TOPICS.find(t => t.name === topicName);
-	const page = Number(getQuery(event).page ?? "1");
-
-	// TODO: better validation?
-	if (!topic || Number.isNaN(page) || page < 1) {
-		throw createError({ statusCode: 404, message: "Unknown topic" });
-	}
+	const { topic, page } = parseTopicParams(event);
 
 	setHeader(event, "cache-control", "public, max-age=60, stale-while-revalidate=10");
 
 	const timing = new ServerTiming();
 
-	const items = await timing.timeAsync("fetch", () =>
-		// $fetch<TopicItem[]>(`https://api.hnpwa.com/v0/${topic.value}/${page}.json`),
-		$fetch<TopicItem[]>(`https://api.hackerwebapp.com/${topic.value}?page=${page}.json`),
-	);
+	const items = await timing.timeAsync("fetch", () => fetchTopic(topic, page));
 
 	return renderPage(
 		<>
