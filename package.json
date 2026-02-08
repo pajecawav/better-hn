@@ -19,15 +19,15 @@
 		"prepare:nitro": "nitropack prepare"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^20.4.0",
-		"@commitlint/config-conventional": "^20.4.0",
+		"@commitlint/cli": "^20.4.1",
+		"@commitlint/config-conventional": "^20.4.1",
 		"@eslint/js": "^9.39.2",
 		"@pajecawav/prettier-config": "^1.0.0",
 		"@types/js-cookie": "^3.0.6",
 		"@vercel/analytics": "^1.6.1",
 		"cross-env": "^10.1.0",
 		"eslint": "^9.39.2",
-		"hono": "^4.11.7",
+		"hono": "^4.11.8",
 		"husky": "^9.1.7",
 		"js-cookie": "^3.0.5",
 		"lint-staged": "^16.2.7",
