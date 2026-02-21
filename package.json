@@ -19,8 +19,8 @@
 		"prepare:nitro": "nitropack prepare"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^20.4.1",
-		"@commitlint/config-conventional": "^20.4.1",
+		"@commitlint/cli": "^20.4.2",
+		"@commitlint/config-conventional": "^20.4.2",
 		"@eslint/js": "^10.0.1",
 		"@pajecawav/prettier-config": "^1.0.0",
 		"@types/js-cookie": "^3.0.6",
@@ -34,13 +34,13 @@
 		"nitropack": "^2.13.1",
 		"npm-run-all2": "^8.0.4",
 		"prettier": "^3.8.1",
-		"rimraf": "^6.1.2",
+		"rimraf": "^6.1.3",
 		"sass": "^1.97.3",
 		"tailwind-vars": "^0.1.6",
 		"tiny-server-timing": "^0.1.6",
-		"typescript-eslint": "^8.55.0",
+		"typescript-eslint": "^8.56.0",
 		"vite": "^7.3.1",
 		"vite-plugin-pwa": "^1.2.0"
 	},
-	"packageManager": "pnpm@10.29.3+sha512.498e1fb4cca5aa06c1dcf2611e6fafc50972ffe7189998c409e90de74566444298ffe43e6cd2acdc775ba1aa7cc5e092a8b7054c811ba8c5770f84693d33d2dc"
+	"packageManager": "pnpm@10.30.0+sha512.2b5753de015d480eeb88f5b5b61e0051f05b4301808a82ec8b840c9d2adf7748eb352c83f5c1593ca703ff1017295bc3fdd3119abb9686efc96b9fcb18200937"
 }
