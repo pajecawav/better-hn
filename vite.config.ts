@@ -40,6 +40,7 @@ export default defineConfig({
 			injectRegister: "inline",
 			workbox: {
 				globPatterns: ["**/*.{js,css,ico,png,svg}"],
+				navigateFallback: null,
 			},
 		}),
 	],
