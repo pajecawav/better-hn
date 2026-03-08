@@ -4,7 +4,7 @@ import { ManifestOptions, VitePWA } from "vite-plugin-pwa";
 const pwaManifest: Partial<ManifestOptions> = {
 	name: "Better HN",
 	short_name: "Better HN",
-	description: "A Hacker News clone built with Nitro and Hono",
+	description: "An alternative UI for Hacker News built with Nitro and Hono",
 	icons: [
 		{
 			src: "/android-chrome-192x192.png",
