@@ -24,7 +24,7 @@
 		"@eslint/js": "^10.0.1",
 		"@pajecawav/prettier-config": "^1.0.0",
 		"@types/js-cookie": "^3.0.6",
-		"@vercel/analytics": "^1.6.1",
+		"@vercel/analytics": "^2.0.1",
 		"cross-env": "^10.1.0",
 		"eslint": "^10.0.3",
 		"hono": "^4.12.5",
