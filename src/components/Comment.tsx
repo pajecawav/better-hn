@@ -13,8 +13,6 @@ interface CommentProps {
 export const Comment = ({ comment, rootId, parentId, prevId, nextId }: CommentProps) => {
 	const commentLink = (id: number) => `#comment-${id}`;
 
-	const content = replaceHnPostLinks(comment.content);
-
 	return (
 		<article id={`comment-${comment.id}`} class="comment">
 			<div class="commentBody" tabindex={-1}>
@@ -56,7 +54,18 @@ export const Comment = ({ comment, rootId, parentId, prevId, nextId }: CommentPr
 					</button>
 				</p>
 
-				<div class="content" dangerouslySetInnerHTML={{ __html: content }} />
+				{comment.content && (
+					<div
+						class="content"
+						dangerouslySetInnerHTML={{ __html: replaceHnPostLinks(comment.content) }}
+					/>
+				)}
+
+				{comment.dead ? (
+					<div class="content dead">dead</div>
+				) : (
+					comment.deleted && <div class="content deleted">deleted</div>
+				)}
 			</div>
 
 			<div class="repliesContainer">

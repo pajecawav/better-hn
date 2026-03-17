@@ -30,6 +30,11 @@
 .content {
 	overflow-wrap: anywhere;
 
+	&.dead,
+	&.deleted {
+		color: var(--neutral-400);
+	}
+
 	p,
 	pre {
 		margin-block: var(--size-2);

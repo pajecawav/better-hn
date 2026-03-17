@@ -5,6 +5,7 @@ export interface Comment {
 	time_ago: string;
 	content: string;
 	deleted?: boolean;
+	dead?: boolean;
 	comments: Comment[];
 	comments_count: number;
 	url: string;
