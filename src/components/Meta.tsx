@@ -2,6 +2,15 @@ import { useSSRContext } from "~/lib/context";
 import { getThemeColor } from "~/lib/theme";
 import { buildPageTitle } from "~/lib/title";
 
+const SPECULATION_RULES = {
+	prefetch: [
+		{
+			where: { href_matches: "/*" },
+			eagerness: "eager",
+		},
+	],
+};
+
 export const Meta = () => {
 	const { title, theme, assets } = useSSRContext();
 
@@ -33,6 +42,11 @@ export const Meta = () => {
 			<meta
 				name="google-site-verification"
 				content="FnhvmqWUsfbh_7kFL_8bcS5_wOYRnaQD1dY4IB3WT7s"
+			/>
+
+			<script
+				type="speculationrules"
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(SPECULATION_RULES, null, 4) }}
 			/>
 		</head>
 	);
