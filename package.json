@@ -27,7 +27,7 @@
 		"@vercel/analytics": "^2.0.1",
 		"cross-env": "^10.1.0",
 		"eslint": "^10.2.0",
-		"hono": "^4.12.9",
+		"hono": "^4.12.12",
 		"husky": "^9.1.7",
 		"js-cookie": "^3.0.5",
 		"lint-staged": "^16.4.0",
@@ -39,7 +39,7 @@
 		"tailwind-vars": "^0.1.6",
 		"tiny-server-timing": "^0.1.6",
 		"typescript-eslint": "^8.58.1",
-		"vite": "^8.0.3",
+		"vite": "^8.0.8",
 		"vite-plugin-pwa": "^1.2.0"
 	},
 	"packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319"
