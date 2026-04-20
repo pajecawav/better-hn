@@ -1,4 +1,5 @@
 import { ServerTiming } from "tiny-server-timing";
+import { sendEarlyHints } from "~/assets";
 import { Link } from "~/components/Link";
 import { User } from "~/lib/user";
 import { renderPage } from "~/render";
@@ -7,6 +8,8 @@ export default defineEventHandler(async event => {
 	const userName = getRouterParam(event, "userName");
 
 	setHeader(event, "cache-control", "public, max-age=60, stale-while-revalidate=10");
+
+	await sendEarlyHints(event);
 
 	const timing = new ServerTiming();
 
