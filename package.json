@@ -19,7 +19,7 @@
 		"prepare:nitro": "nitropack prepare"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^20.5.0",
+		"@commitlint/cli": "^20.5.2",
 		"@commitlint/config-conventional": "^20.5.0",
 		"@eslint/js": "^10.0.1",
 		"@pajecawav/prettier-config": "^1.0.0",
@@ -27,20 +27,20 @@
 		"@vercel/analytics": "^2.0.1",
 		"cross-env": "^10.1.0",
 		"eslint": "^10.2.1",
-		"hono": "^4.12.14",
+		"hono": "^4.12.15",
 		"husky": "^9.1.7",
 		"js-cookie": "^3.0.5",
 		"lint-staged": "^16.4.0",
-		"nitropack": "^2.13.3",
+		"nitropack": "^2.13.4",
 		"npm-run-all2": "^8.0.4",
 		"prettier": "^3.8.3",
 		"rimraf": "^6.1.3",
 		"sass": "^1.99.0",
 		"tailwind-vars": "^0.1.6",
 		"tiny-server-timing": "^0.1.6",
-		"typescript-eslint": "^8.59.0",
+		"typescript-eslint": "^8.59.1",
 		"vite": "^8.0.10",
 		"vite-plugin-pwa": "^1.2.0"
 	},
-	"packageManager": "pnpm@10.33.1+sha512.05ba3c1d5d1c18f68df06470d74055e62d41fc110a0c660db1b2dfb2785327f04cf0f68345d4609bc52089e7fa0343c31593b2f9594e2c5d5da426230acc9820"
+	"packageManager": "pnpm@10.33.2+sha512.a90faf6feeab71ad6c6e57f94e0fe1a12f5dcc22cd754db40ae9593eb6a3e0b6b12e3540218bb37ae083404b1f2ce6db2a4121e979829b4aff94b99f49da1cf8"
 }
