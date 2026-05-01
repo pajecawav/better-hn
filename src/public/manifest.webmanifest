@@ -1,0 +1,24 @@
+{
+	"$schema": "https://www.schemastore.org/web-manifest-combined.json",
+	"name": "Better HN",
+	"short_name": "Better HN",
+	"description": "An alternative UI for Hacker News built with Nitro and Hono",
+	"icons": [
+		{
+			"src": "/android-chrome-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "/android-chrome-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any maskable"
+		}
+	],
+	"start_url": "/top",
+	"theme_color": "#18181b",
+	"background_color": "#18181b",
+	"display": "standalone",
+	"orientation": "portrait"
+}

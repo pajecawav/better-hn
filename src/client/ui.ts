@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { DEFAULT_THEME, THEME_COOKIE, Theme, getThemeColor } from "../lib/theme";
+import { DEFAULT_THEME, getThemeColor, THEME_COOKIE, THEMES, type Theme } from "../lib/theme";
 
 const getTheme = () => {
 	return (Cookies.get(THEME_COOKIE) as Theme | undefined) ?? DEFAULT_THEME;
@@ -20,8 +20,8 @@ const updateTheme = () => {
 (window as any).UI = {
 	switchTheme() {
 		const newTheme: Theme = document.documentElement.classList.contains("dark")
-			? Theme.LIGHT
-			: Theme.DARK;
+			? THEMES.LIGHT
+			: THEMES.DARK;
 
 		setTheme(newTheme);
 	},

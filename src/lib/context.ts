@@ -1,12 +1,10 @@
 import { createContext, useContext } from "hono/jsx";
-import { Theme } from "./theme";
-import { Assets } from "~/assets";
+import type { Theme } from "./theme";
 
 export interface SSRContextValue {
 	url: URL;
-	title: string;
-	assets: Assets;
-	theme?: Theme;
+	title?: string;
+	theme: Theme;
 }
 
 export const SSRContext = createContext<SSRContextValue | null>(null);

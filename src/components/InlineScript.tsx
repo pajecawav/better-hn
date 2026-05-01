@@ -1,4 +1,4 @@
-import { Theme, THEME_COOKIE } from "~/lib/theme";
+import { THEMES, THEME_COOKIE } from "~/lib/theme";
 
 const script = `
 if (!("share" in navigator)) {
@@ -19,16 +19,16 @@ if (!("share" in navigator)) {
 
 		const userMedia = window.matchMedia("(prefers-color-scheme: dark)");
 		if (userMedia?.matches) {
-			return "${Theme.DARK}";
+			return "${THEMES.DARK}";
 		}
 
-		return "${Theme.LIGHT}";
+		return "${THEMES.LIGHT}";
 	}
 
 	const root = document.documentElement;
 	const theme = getTheme();
 
-	root.classList.toggle("dark", theme === "${Theme.DARK}");
+	root.classList.toggle("dark", theme === "${THEMES.DARK}");
 })();
 `;
 

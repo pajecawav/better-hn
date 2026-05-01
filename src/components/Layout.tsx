@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "hono/jsx";
+import type { PropsWithChildren } from "hono/jsx";
 import { Header } from "~/components/Header";
 
 export const Layout = ({ children }: PropsWithChildren) => {

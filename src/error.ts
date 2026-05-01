@@ -1,8 +1,6 @@
-import type { NitroErrorHandler } from "nitropack";
+import { defineErrorHandler } from "nitro";
 
-const errorHandler: NitroErrorHandler = (error, event) => {
+export default defineErrorHandler(error => {
 	console.error("Unexpected error: ", error);
-	event.node.res.end(`${error.statusCode} ${error.message}`);
-};
-
-export default errorHandler;
+	return new Response(`${error.status} ${error.message}`);
+});

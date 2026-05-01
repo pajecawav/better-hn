@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+	<head>
+		<!-- TODO: migrate to unhead's useSeoMeta -->
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="application-name" content="Better HN" />
+		<meta
+			name="description"
+			content="An alternative UI for Hacker News built with Nitro and Hono"
+		/>
+
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/manifest.webmanifest" />
+
+		<meta
+			name="google-site-verification"
+			content="FnhvmqWUsfbh_7kFL_8bcS5_wOYRnaQD1dY4IB3WT7s"
+		/>
+
+		<script type="speculationrules">
+			{
+				"prefetch": [
+					{
+						"where": { "href_matches": "/*" },
+						"eagerness": "eager"
+					}
+				]
+			}
+		</script>
+	</head>
+
+	<body>
+		<!--ssr-outlet-->
+	</body>
+</html>

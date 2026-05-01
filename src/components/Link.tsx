@@ -1,4 +1,4 @@
-import { JSX } from "hono/jsx";
+import type { JSX } from "hono/jsx";
 import { cn } from "~/lib/utils";
 
 type LinkProps = JSX.IntrinsicElements["a"] & {
