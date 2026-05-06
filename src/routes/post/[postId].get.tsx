@@ -2,7 +2,7 @@ import { ServerTiming } from "tiny-server-timing";
 import { Comment } from "~/components/Comment";
 import { Link } from "~/components/Link";
 import { replaceHnPostLinks } from "~/lib/link";
-import { Post, Comment as TComment } from "~/lib/post";
+import { Post } from "~/lib/post";
 import { renderPage } from "~/render";
 
 export default defineEventHandler(async event => {
@@ -17,27 +17,12 @@ export default defineEventHandler(async event => {
 	const timing = new ServerTiming();
 
 	const post = await timing.timeAsync("fetch", () =>
-		// $fetch<Post>(`https://api.hnpwa.com/v0/item/${postId}.json`),
-		$fetch<Post>(`https://api.hackerwebapp.com/item/${postId}`),
+		$fetch<Post>(`https://bhn-api.pajecawav.workers.dev/item/${postId}`),
 	);
 
 	if (!post) {
 		throw createError({ statusCode: 404, message: "Post not found" });
 	}
-
-	const fillCommentsCount = (item: Post | TComment) => {
-		let count = item.comments.length;
-
-		for (const comment of item.comments ?? []) {
-			count += fillCommentsCount(comment);
-		}
-
-		item.comments_count = count;
-
-		return count;
-	};
-
-	fillCommentsCount(post);
 
 	const url = post.url.startsWith("http") ? post.url : `/item/${post.id}`;
 
@@ -52,9 +37,15 @@ export default defineEventHandler(async event => {
 						</Link>
 
 						<p class="info">
-							{post.points} points by{" "}
-							<Link href={`/user/${post.user}`}>{post.user}</Link> {post.time_ago} |{" "}
-							{post.comments_count}{" "}
+							{typeof post.points === "number" && <>{post.points} points by </>}
+							<Link href={`/user/${post.user}`}>{post.user}</Link> {post.time_ago}
+							{post.parent && (
+								<>
+									{" | "}
+									<Link href={`/post/${post.parent}`}>parent</Link>
+								</>
+							)}{" "}
+							| {post.comments_count}{" "}
 							{post.comments_count === 1 ? "comment" : "comments"}
 						</p>
 

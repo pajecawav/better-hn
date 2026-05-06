@@ -11,7 +11,7 @@ export default defineEventHandler(async event => {
 	const timing = new ServerTiming();
 
 	const user = await timing.timeAsync("fetch", () =>
-		$fetch<User>(`https://api.hnpwa.com/v0/user/${userName}.json`),
+		$fetch<User>(`https://bhn-api.pajecawav.workers.dev/user/${userName}`),
 	);
 
 	if (!user) {
