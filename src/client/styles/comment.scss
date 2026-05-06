@@ -2,6 +2,12 @@
 	&:not(:first-child) {
 		margin-top: var(--size-2);
 	}
+
+	@media (max-width: 639px) {
+		& {
+			scroll-margin-top: var(--size-12);
+		}
+	}
 }
 
 .commentBody {
@@ -38,6 +44,10 @@
 	p,
 	pre {
 		margin-block: var(--size-2);
+	}
+
+	:is(p, pre):first-child {
+		margin-top: var(--size-1);
 	}
 
 	a {

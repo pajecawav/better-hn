@@ -54,39 +54,43 @@ export const Comment = ({ comment, rootId, parentId, prevId, nextId }: CommentPr
 					</button>
 				</p>
 
-				{comment.content && (
-					<div
-						class="content"
-						dangerouslySetInnerHTML={{ __html: replaceHnPostLinks(comment.content) }}
-					/>
-				)}
-
-				{comment.dead ? (
-					<div class="content dead">dead</div>
+				{comment.dead || comment.deleted ? (
+					<div class="content dead">
+						<p>[{comment.dead ? "dead" : "deleted"}]</p>
+					</div>
 				) : (
-					comment.deleted && <div class="content deleted">deleted</div>
+					comment.content && (
+						<div
+							class="content"
+							dangerouslySetInnerHTML={{
+								__html: replaceHnPostLinks(comment.content),
+							}}
+						/>
+					)
 				)}
 			</div>
 
-			<div class="repliesContainer">
-				<button
-					class="foldButton"
-					aria-label="Fold comment"
-					tabindex={-1}
-					onclick={`Comments.toggleComment(${comment.id})`}
-				/>
-				<div class="replies">
-					{comment.comments.map((reply, index) => (
-						<Comment
-							comment={reply}
-							rootId={rootId}
-							parentId={comment.id}
-							prevId={comment.comments[index - 1]?.id}
-							nextId={comment.comments[index + 1]?.id}
-						/>
-					))}
+			{comment.comments.length > 0 && (
+				<div class="repliesContainer">
+					<button
+						class="foldButton"
+						aria-label="Fold comment"
+						tabindex={-1}
+						onclick={`Comments.toggleComment(${comment.id})`}
+					/>
+					<div class="replies">
+						{comment.comments.map((reply, index) => (
+							<Comment
+								comment={reply}
+								rootId={rootId}
+								parentId={comment.id}
+								prevId={comment.comments[index - 1]?.id}
+								nextId={comment.comments[index + 1]?.id}
+							/>
+						))}
+					</div>
 				</div>
-			</div>
+			)}
 		</article>
 	);
 };
