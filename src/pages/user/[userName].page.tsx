@@ -14,7 +14,7 @@ export default definePage({
 		event.res.headers.set("cache-control", "public, max-age=60, stale-while-revalidate=10");
 
 		const user = await withServerTiming(event, "fetch", () =>
-			$fetch<User>(`https://api.hnpwa.com/v0/user/${userName}.json`),
+			$fetch<User>(`https://api.bhn.pajecawav.dev/user/${userName}`),
 		);
 
 		if (!user) {

@@ -5,6 +5,10 @@
 		& p:not(.info) {
 			margin-block: var(--size-2);
 		}
+
+		& p:not(.info):first-child {
+			margin-top: var(--size-1);
+		}
 	}
 
 	.title {
@@ -25,7 +29,7 @@
 	.info {
 		margin-top: var(--size-1);
 
-		a {
+		a:first-of-type {
 			text-decoration: underline;
 		}
 	}

@@ -62,9 +62,13 @@ export default definePage({
 			});
 		}
 
-		// const items = await $fetch<TopicItem[]>(`https://api.hnpwa.com/v0/${topic.value}/${page}.json`),
 		const items = await withServerTiming(event, "fetch", () =>
-			$fetch<TopicItem[]>(`https://api.hackerwebapp.com/${topic.value}?page=${page}.json`),
+			$fetch<TopicItem[]>(`https://api.bhn.pajecawav.dev/${topic.value}`, {
+				query: {
+					offset: (page - 1) * ITEMS_PER_PAGE,
+					limit: ITEMS_PER_PAGE,
+				},
+			}),
 		);
 
 		return (
