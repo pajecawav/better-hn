@@ -1,8 +1,7 @@
-import Cookies from "js-cookie";
-import { DEFAULT_THEME, getThemeColor, THEME_COOKIE, THEMES, type Theme } from "../lib/theme";
+import { DEFAULT_THEME, getThemeColor, THEME_STORAGE_KEY, THEMES, type Theme } from "../lib/theme";
 
 const getTheme = () => {
-	return (Cookies.get(THEME_COOKIE) as Theme | undefined) ?? DEFAULT_THEME;
+	return (localStorage.getItem(THEME_STORAGE_KEY) as Theme | null) ?? DEFAULT_THEME;
 };
 
 const setTheme = (theme: Theme) => {
@@ -10,7 +9,7 @@ const setTheme = (theme: Theme) => {
 	document
 		.querySelector('meta[name="theme-color"]')
 		?.setAttribute("content", getThemeColor(theme));
-	Cookies.set(THEME_COOKIE, theme, { expires: 365 * 24 * 60 * 60, sameSite: "lax" });
+	localStorage.setItem(THEME_STORAGE_KEY, theme);
 };
 
 const updateTheme = () => {
@@ -30,5 +29,3 @@ const updateTheme = () => {
 window.addEventListener("pageshow", () => {
 	updateTheme();
 });
-
-updateTheme();

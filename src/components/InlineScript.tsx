@@ -1,4 +1,4 @@
-import { THEMES, THEME_COOKIE } from "~/lib/theme";
+import { THEMES, THEME_STORAGE_KEY } from "~/lib/theme";
 
 const script = `
 if (!("share" in navigator)) {
@@ -10,7 +10,7 @@ if (!("share" in navigator)) {
 		let storedTheme = undefined;
 
 		try {
-            storedTheme = document.cookie.split("${THEME_COOKIE}=")[1]?.split(";")[0];
+      storedTheme = localStorage.getItem("${THEME_STORAGE_KEY}");
 		} catch {}
 
 		if (typeof storedTheme === "string") {
