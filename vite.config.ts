@@ -1,5 +1,6 @@
 import yamf from "@pajecawav/yamf/vite";
-import { defineConfig } from "vite";
+import { rolldown } from "rolldown";
+import { defineConfig, type PluginOption } from "vite";
 
 export default defineConfig({
 	resolve: {
@@ -22,5 +23,37 @@ export default defineConfig({
 				},
 			},
 		}),
+		bundledStringPlugin(),
 	],
 });
+
+function bundledStringPlugin(): PluginOption {
+	return {
+		name: "bundled-string",
+		load: {
+			filter: {
+				id: /\?bundle$/,
+			},
+			async handler(id: string) {
+				const entry = id.replace(/\?bundle$/, "");
+
+				const bundle = await rolldown({
+					input: entry,
+				});
+
+				const output = await bundle.generate({
+					format: "iife",
+					minify: true,
+				});
+
+				const chunk = output.output.find(o => o.type === "chunk");
+
+				if (!chunk) {
+					throw new Error("No chunk found");
+				}
+
+				return `export default ${JSON.stringify(chunk.code)}`;
+			},
+		},
+	};
+}
