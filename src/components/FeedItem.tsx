@@ -16,7 +16,6 @@ export const FeedItem = ({ item, index }: FeedItemProps) => {
 						{item.domain && <span className="domain">({item.domain})</span>}
 					</a>
 				</h2>
-
 				{item.type === "job" ? (
 					<p className="info">{item.time_ago}</p>
 				) : (

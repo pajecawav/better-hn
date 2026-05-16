@@ -1,6 +1,6 @@
+import { definePage } from "@pajecawav/yamf";
 import { HTTPError } from "nitro";
 import { $fetch } from "ofetch";
-import { definePage } from "@pajecawav/yamf";
 import { FeedItem } from "~/components/FeedItem";
 import { buildPageTitle } from "~/lib/title";
 import { TOPICS, type TopicItem } from "~/lib/topic";

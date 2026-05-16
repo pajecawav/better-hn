@@ -1,5 +1,5 @@
 (window as any).Share = {
 	sharePage() {
-		navigator.share({ url: window.location.href });
+		void navigator.share({ url: window.location.href });
 	},
 };

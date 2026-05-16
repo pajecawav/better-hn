@@ -1,6 +1,6 @@
+import { definePage } from "@pajecawav/yamf";
 import { HTTPError } from "nitro";
 import { $fetch } from "ofetch";
-import { definePage } from "@pajecawav/yamf";
 import { Comment } from "~/components/Comment";
 import { Link } from "~/components/Link";
 import { replaceHnPostLinks } from "~/lib/link";
@@ -28,6 +28,7 @@ export default definePage({
 			title: buildPageTitle(post.title),
 		});
 
+		// oxlint-disable-next-line unicorn/consistent-function-scoping
 		const fillCommentsCount = (item: Post | TComment) => {
 			let count = item.comments.length;
 

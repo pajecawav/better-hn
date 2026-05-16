@@ -10,9 +10,9 @@ interface CommentProps {
 	nextId?: number;
 }
 
-export const Comment = ({ comment, rootId, parentId, prevId, nextId }: CommentProps) => {
-	const commentLink = (id: number) => `#comment-${id}`;
+const commentLink = (id: number) => `#comment-${id}`;
 
+export const Comment = ({ comment, rootId, parentId, prevId, nextId }: CommentProps) => {
 	return (
 		<article id={`comment-${comment.id}`} class="comment">
 			<div class="commentBody" tabindex={-1}>

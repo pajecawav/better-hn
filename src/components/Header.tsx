@@ -1,10 +1,10 @@
 import { useEvent } from "@pajecawav/yamf";
-import { Link } from "./Link";
 import { GitHubIcon } from "./icons/GitHubIcon";
 import { MagnifyingGlassIcon } from "./icons/MagnifyingGlassIcon";
 import { MoonIcon } from "./icons/MoonIcon";
 import { PaperAirplaneIcon } from "./icons/PaperAirplaneIcon";
 import { SunIcon } from "./icons/SunIcon";
+import { Link } from "./Link";
 
 const LINKS = [
 	{ title: "Top", href: "/top" },
