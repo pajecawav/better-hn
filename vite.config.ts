@@ -1,47 +1,59 @@
-import { defineConfig } from "vite";
-import { ManifestOptions, VitePWA } from "vite-plugin-pwa";
-
-const pwaManifest: Partial<ManifestOptions> = {
-	name: "Better HN",
-	short_name: "Better HN",
-	description: "An alternative UI for Hacker News built with Nitro and Hono",
-	icons: [
-		{
-			src: "/android-chrome-192x192.png",
-			sizes: "192x192",
-			type: "image/png",
-		},
-		{
-			src: "/android-chrome-512x512.png",
-			sizes: "512x512",
-			type: "image/png",
-			purpose: "any maskable",
-		},
-	],
-	start_url: "/top",
-	theme_color: "#18181b",
-	background_color: "#18181b",
-	display: "standalone",
-	orientation: "portrait",
-};
+import yamf from "@pajecawav/yamf/vite";
+import { rolldown } from "rolldown";
+import { defineConfig, type PluginOption } from "vite";
 
 export default defineConfig({
-	appType: "mpa",
+	resolve: {
+		tsconfigPaths: true,
+	},
 	build: {
-		manifest: true,
-		outDir: "dist-vite",
-		rollupOptions: {
-			input: "./src/client/index.ts",
-		},
+		sourcemap: true,
 	},
 	plugins: [
-		VitePWA({
-			manifest: pwaManifest,
-			injectRegister: "inline",
-			workbox: {
-				globPatterns: ["**/*.{js,css,ico,png,svg}"],
-				navigateFallback: null,
+		yamf({
+			nitro: {
+				errorHandler: "./src/error.ts",
+				compatibilityDate: "2026-04-29",
+				preset: process.env.VERCEL ? "vercel" : undefined,
+				routeRules: {
+					"/": { redirect: "/top" },
+					// "/*": { cache: { maxAge: 60 } },
+					// "/post/*": { cache: { maxAge: 60 } },
+					// "/user/*": { cache: { maxAge: 60 } },
+				},
 			},
 		}),
+		bundledStringPlugin(),
 	],
 });
+
+function bundledStringPlugin(): PluginOption {
+	return {
+		name: "bundled-string",
+		load: {
+			filter: {
+				id: /\?bundle$/,
+			},
+			async handler(id: string) {
+				const entry = id.replace(/\?bundle$/, "");
+
+				const bundle = await rolldown({
+					input: entry,
+				});
+
+				const output = await bundle.generate({
+					format: "iife",
+					minify: true,
+				});
+
+				const chunk = output.output.find(o => o.type === "chunk");
+
+				if (!chunk) {
+					throw new Error("No chunk found");
+				}
+
+				return `export default ${JSON.stringify(chunk.code)}`;
+			},
+		},
+	};
+}

@@ -1,8 +1,4 @@
 node_modules
-dist
-dist-vite
-.data
-.nitro
-.cache
 .output
 .env
+*.tsbuildinfo

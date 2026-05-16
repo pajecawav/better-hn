@@ -1,4 +1,4 @@
-import { TopicItem } from "~/lib/topic";
+import type { TopicItem } from "~/lib/topic";
 
 interface FeedItemProps {
 	item: TopicItem;

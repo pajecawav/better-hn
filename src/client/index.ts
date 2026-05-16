@@ -1,7 +1,6 @@
 import "./analytics";
 import "./comments";
 import "./prefetch";
-import "./service-worker";
 import "./share";
 import "./ui";
 

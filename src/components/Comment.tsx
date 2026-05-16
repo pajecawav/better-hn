@@ -1,5 +1,5 @@
 import { replaceHnPostLinks } from "~/lib/link";
-import { Comment as CommentType } from "~/lib/post";
+import type { Comment as CommentType } from "~/lib/post";
 import { Link } from "./Link";
 
 interface CommentProps {

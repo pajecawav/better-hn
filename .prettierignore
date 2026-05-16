@@ -1,5 +1,4 @@
 dist
 dist-vite
 .output
-.nitro
 pnpm-lock.yaml

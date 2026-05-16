@@ -1,10 +1,12 @@
-export const enum Theme {
-	LIGHT = "light",
-	DARK = "dark",
-}
+export const THEMES = {
+	LIGHT: "light",
+	DARK: "dark",
+} as const;
 
-export const DEFAULT_THEME: Theme = Theme.LIGHT;
+export type Theme = (typeof THEMES)[keyof typeof THEMES];
 
-export const THEME_COOKIE = "bhn.theme";
+export const DEFAULT_THEME: Theme = THEMES.LIGHT;
 
-export const getThemeColor = (theme: Theme) => (theme == Theme.LIGHT ? "#ffffff" : "#18181b");
+export const THEME_STORAGE_KEY = "bhn.theme";
+
+export const getThemeColor = (theme: Theme) => (theme == THEMES.LIGHT ? "#ffffff" : "#18181b");

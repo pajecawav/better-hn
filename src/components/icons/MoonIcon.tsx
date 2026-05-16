@@ -1,4 +1,4 @@
-import { JSX } from "hono/jsx";
+import type { JSX } from "hono/jsx";
 
 export const MoonIcon = (props: JSX.HTMLAttributes) => {
 	return (

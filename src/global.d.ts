@@ -1,1 +1,4 @@
-/// <reference types="vite-plugin-pwa/client" />
+declare module "*?bundle" {
+	const content: string;
+	export default content;
+}

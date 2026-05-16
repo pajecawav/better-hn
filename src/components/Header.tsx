@@ -1,4 +1,4 @@
-import { useSSRContext } from "~/lib/context";
+import { useEvent } from "@pajecawav/yamf";
 import { Link } from "./Link";
 import { GitHubIcon } from "./icons/GitHubIcon";
 import { MagnifyingGlassIcon } from "./icons/MagnifyingGlassIcon";
@@ -14,7 +14,7 @@ const LINKS = [
 ];
 
 export const Header = () => {
-	const { url } = useSSRContext();
+	const event = useEvent();
 
 	return (
 		<header className="header">
@@ -24,7 +24,7 @@ export const Header = () => {
 						className="link"
 						activeClassName="link__active"
 						href={link.href}
-						isActive={link.href === url.pathname}
+						isActive={link.href === event.url.pathname}
 						data-prefetch
 					>
 						{link.title}
