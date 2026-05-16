@@ -13,8 +13,8 @@
 		"prepare": "husky"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^20.5.3",
-		"@commitlint/config-conventional": "^20.5.3",
+		"@commitlint/cli": "^21.0.1",
+		"@commitlint/config-conventional": "^21.0.1",
 		"@eslint/js": "^10.0.1",
 		"@pajecawav/prettier-config": "^1.0.2",
 		"@pajecawav/yamf": "^0.0.3",
