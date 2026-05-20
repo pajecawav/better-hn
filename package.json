@@ -2,7 +2,9 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"build": "vite build",
+		"build": "cross-env FORCE_COLOR=1 run-s -l build:sitemap build:vite",
+		"build:vite": "vite build",
+		"build:sitemap": "node scripts/build-sitemap.ts",
 		"dev": "vite",
 		"preview": "vite preview",
 		"lint": "cross-env FORCE_COLOR=1 run-p -l lint:*",
@@ -11,7 +13,7 @@
 		"lint:format": "pt format --check",
 		"format": "pt format",
 		"clean": "rimraf .output .vercel node_modules/.cache",
-		"prepare": "husky"
+		"prepare": "pt prepare"
 	},
 	"devDependencies": {
 		"@pajecawav/tools": "^0.0.3",
