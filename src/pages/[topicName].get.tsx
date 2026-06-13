@@ -1,5 +1,6 @@
 import { definePage } from "@pajecawav/yamf";
 import { HTTPError } from "nitro";
+import { withServerTiming } from "nitro/h3";
 import { $fetch } from "ofetch";
 import { FeedItem } from "~/components/FeedItem";
 import { buildPageTitle } from "~/lib/title";
@@ -25,8 +26,8 @@ export default definePage({
 		});
 
 		// const items = await $fetch<TopicItem[]>(`https://api.hnpwa.com/v0/${topic.value}/${page}.json`),
-		const items = await $fetch<TopicItem[]>(
-			`https://api.hackerwebapp.com/${topic.value}?page=${page}.json`,
+		const items = await withServerTiming(event, "fetch", () =>
+			$fetch<TopicItem[]>(`https://api.hackerwebapp.com/${topic.value}?page=${page}.json`),
 		);
 
 		return (

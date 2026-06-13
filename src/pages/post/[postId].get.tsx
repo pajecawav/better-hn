@@ -1,5 +1,6 @@
 import { definePage } from "@pajecawav/yamf";
 import { HTTPError } from "nitro";
+import { withServerTiming } from "nitro/h3";
 import { $fetch } from "ofetch";
 import { Comment } from "~/components/Comment";
 import { Link } from "~/components/Link";
@@ -17,8 +18,10 @@ export default definePage({
 
 		event.res.headers.set("cache-control", "public, max-age=60, stale-while-revalidate=10");
 
-		// const post = await $fetch<Post>(`https://api.hnpwa.com/v0/item/${postId}.json`),
-		const post = await $fetch<Post>(`https://api.hackerwebapp.com/item/${postId}`);
+		const post = await withServerTiming(event, "fetch", () =>
+			// $fetch<Post>(`https://api.hnpwa.com/v0/item/${postId}.json`),
+			$fetch<Post>(`https://api.hackerwebapp.com/item/${postId}`),
+		);
 
 		if (!post) {
 			throw new HTTPError({ statusCode: 404, message: "Post not found" });

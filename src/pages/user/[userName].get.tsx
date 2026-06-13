@@ -1,5 +1,6 @@
 import { definePage } from "@pajecawav/yamf";
 import { HTTPError } from "nitro";
+import { withServerTiming } from "nitro/h3";
 import { $fetch } from "ofetch";
 import { Link } from "~/components/Link";
 import { buildPageTitle } from "~/lib/title";
@@ -11,7 +12,9 @@ export default definePage({
 
 		event.res.headers.set("cache-control", "public, max-age=60, stale-while-revalidate=10");
 
-		const user = await $fetch<User>(`https://api.hnpwa.com/v0/user/${userName}.json`);
+		const user = await withServerTiming(event, "fetch", () =>
+			$fetch<User>(`https://api.hnpwa.com/v0/user/${userName}.json`),
+		);
 
 		if (!user) {
 			throw new HTTPError({ statusCode: 404, message: "User not found" });
