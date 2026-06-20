@@ -16,19 +16,19 @@
 		"prepare": "pt prepare"
 	},
 	"devDependencies": {
-		"@pajecawav/tools": "^0.0.4",
+		"@pajecawav/tools": "^0.0.5",
 		"@pajecawav/yamf": "^0.0.4",
 		"@types/node": "^25.9.3",
-		"@typescript/native-preview": "7.0.0-dev.20260612.1",
+		"@typescript/native-preview": "7.0.0-dev.20260618.1",
 		"@vercel/analytics": "^2.0.1",
 		"cross-env": "^10.1.0",
-		"hono": "^4.12.25",
+		"hono": "^4.12.26",
 		"husky": "^9.1.7",
 		"lint-staged": "^17.0.7",
 		"nitro": "3.0.260610-beta",
 		"npm-run-all2": "^9.0.2",
-		"oxfmt": "^0.54.0",
-		"oxlint": "^1.69.0",
+		"oxfmt": "^0.55.0",
+		"oxlint": "^1.70.0",
 		"oxlint-tsgolint": "^0.23.0",
 		"rimraf": "^6.1.3",
 		"sass": "^1.101.0",
@@ -36,5 +36,5 @@
 		"tiny-server-timing": "^0.1.6",
 		"vite": "^8.0.16"
 	},
-	"packageManager": "pnpm@11.5.3+sha512.7ac1c919341c213a34dc0d02afb7143c5c26ac26ee8c4782deea821b8ac64d2134a081fd8941dae6e29bbb48f58dfc2b7fbceeccc07cb2f09d219d342a4969ed"
+	"packageManager": "pnpm@11.7.0+sha512.19cc852c120c7125760f2443ee6be0ca5b40f9f50598de1a09a1f177503e010e57c23c77646e01e761de59bf874fb22a3398c33ab9691fc13eb946b6f0f4d620"
 }
