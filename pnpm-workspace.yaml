@@ -4,4 +4,4 @@ allowBuilds:
     "@parcel/watcher": true
     esbuild: true
 minimumReleaseAgeExclude:
-    - "@pajecawav/yamf@0.0.4"
+    - "@pajecawav/yamf@0.0.5"
