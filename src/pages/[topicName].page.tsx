@@ -32,7 +32,7 @@ export default definePage({
 
 		return (
 			<>
-				<div className="feed">
+				<div className="feed" data-testid="topic-feed">
 					{items.map((item, index) => (
 						<FeedItem item={item} index={index + 1 + ITEMS_PER_PAGE * (page - 1)} />
 					))}

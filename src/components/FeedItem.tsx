@@ -9,7 +9,7 @@ export const FeedItem = ({ item, index }: FeedItemProps) => {
 	return (
 		<>
 			<span className="index">{index}</span>
-			<div className="item">
+			<div className="item" data-testid="feed-item">
 				<h2>
 					<a href={item.domain ? item.url! : `/post/${item.id}`} className="link">
 						{item.title}{" "}

@@ -12,12 +12,15 @@
 		"lint:tsc": "tsgo -b --noEmit",
 		"lint:format": "pt format --check",
 		"format": "pt format",
+		"test": "playwright test",
+		"test:ui": "playwright test --ui",
 		"clean": "rimraf .output .vercel node_modules/.cache",
 		"prepare": "pt prepare"
 	},
 	"devDependencies": {
 		"@pajecawav/tools": "^0.0.7",
 		"@pajecawav/yamf": "^0.0.5",
+		"@playwright/test": "^1.54.0",
 		"@types/node": "^25.9.5",
 		"@typescript/native-preview": "7.0.0-dev.20260707.2",
 		"@vercel/analytics": "^2.0.1",

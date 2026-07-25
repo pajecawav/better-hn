@@ -14,8 +14,8 @@ const commentLink = (id: number) => `#comment-${id}`;
 
 export const Comment = ({ comment, rootId, parentId, prevId, nextId }: CommentProps) => {
 	return (
-		<article id={`comment-${comment.id}`} class="comment">
-			<div class="commentBody" tabindex={-1}>
+		<article id={`comment-${comment.id}`} class="comment" data-testid="comment">
+			<div class="commentBody" tabindex={-1} data-testid="comment-body">
 				<p class="info">
 					{comment.user && (
 						<Link class="user commentUser" href={`/user/${comment.user}`}>
@@ -48,7 +48,10 @@ export const Comment = ({ comment, rootId, parentId, prevId, nextId }: CommentPr
 						</>
 					)}
 					{" | "}
-					<button onclick={`Comments.toggleComment(${comment.id})`}>
+					<button
+						data-testid="comment-toggle"
+						onclick={`Comments.toggleComment(${comment.id})`}
+					>
 						<span class="fold">[–]</span>
 						<span class="unfold">[{comment.comments_count + 1} more]</span>
 					</button>

@@ -25,8 +25,10 @@ export default definePage({
 		});
 
 		return (
-			<div class="user">
-				<h1 class="name">{user.id}</h1>
+			<div class="user" data-testid="user">
+				<h1 class="name" data-testid="user-name">
+					{user.id}
+				</h1>
 				<div class="info">
 					<span>Created:</span>
 					<span>{user?.created}</span>
