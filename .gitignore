@@ -3,3 +3,5 @@ node_modules
 .env
 *.tsbuildinfo
 src/public/sitemap.xml
+playwright-report/
+test-results/

@@ -50,10 +50,12 @@ export default definePage({
 
 		return (
 			<>
-				<div class="post">
+				<div class="post" data-testid="post">
 					<article class="item">
 						<Link href={url}>
-							<h1 class="title">{post.title}</h1>
+							<h1 class="title" data-testid="post-title">
+								{post.title}
+							</h1>
 							{post.domain && <span class="domain"> ({post.domain})</span>}
 						</Link>
 
