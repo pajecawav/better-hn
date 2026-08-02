@@ -19,25 +19,25 @@
 	},
 	"devDependencies": {
 		"@pajecawav/tools": "^0.0.7",
-		"@pajecawav/yamf": "^0.0.5",
-		"@playwright/test": "^1.61.1",
+		"@pajecawav/yamf": "^0.0.7",
+		"@playwright/test": "^1.62.1",
 		"@types/node": "^25.9.5",
 		"@typescript/native-preview": "7.0.0-dev.20260707.2",
 		"@vercel/analytics": "^2.0.1",
 		"cross-env": "^10.1.0",
-		"hono": "^4.12.31",
+		"hono": "^4.12.33",
 		"husky": "^9.1.7",
-		"lint-staged": "^17.2.0",
+		"lint-staged": "^17.3.0",
 		"nitro": "3.0.260610-beta",
-		"npm-run-all2": "^9.0.2",
-		"oxfmt": "^0.60.0",
-		"oxlint": "^1.75.0",
+		"npm-run-all2": "^9.0.3",
+		"oxfmt": "^0.61.0",
+		"oxlint": "^1.76.0",
 		"oxlint-tsgolint": "^7.0.2001",
 		"rimraf": "^6.1.3",
-		"sass": "^1.101.6",
+		"sass": "^1.102.0",
 		"tailwind-vars": "^0.1.6",
 		"tiny-server-timing": "^0.1.6",
-		"vite": "^8.1.5"
+		"vite": "^8.2.0"
 	},
-	"packageManager": "pnpm@11.16.0+sha512.b767e9a98fc87aec0f42daefcd0e84941c2cdb45d73c4e1e68860fb2bdfdbe032ab592105479e5e05c237f740c8a5ffdbbb52385797ddc2296745a1bbb883e8d"
+	"packageManager": "pnpm@11.18.0+sha512.33d83c77da82f49fba836925c6f1b841181ec3132b670639bd012f7075f5c7cf634c5f870147c19aae7478fac01df09d8892e880454896edd23ee9b33757563c"
 }
