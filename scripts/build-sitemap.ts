@@ -17,7 +17,7 @@ const ids = await $fetch<number[]>("https://hacker-news.firebaseio.com/v0/bestst
 const buildEntry = (pathname: string) =>
 	`\
 <url>
-    <loc>https://bhn.vercel.app/${pathname}</loc>
+    <loc>https://bhn.pajecawav.dev/${pathname}</loc>
 </url>`.trim();
 
 const sitemap = `\
