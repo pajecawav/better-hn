@@ -28,4 +28,17 @@ test.describe("Post page", () => {
 		await toggle.click();
 		await expect(comment).not.toHaveAttribute("data-folded", "true");
 	});
+
+	test("scrolls to comment via deeplink", async ({ page }) => {
+		await page.goto("/post/8863#comment-11003");
+
+		const comment = page.locator("#comment-11003");
+		await expect(comment).toBeVisible();
+
+		await expect
+			.poll(async () => (await comment.boundingBox())?.y, {
+				message: "comment is scrolled into view",
+			})
+			.toBeLessThan(100);
+	});
 });
