@@ -24,5 +24,6 @@ html.dark {
 }
 
 body {
-	padding: 0 var(--size-2) var(--size-4);
+	padding: 0 var(--size-2)
+		calc(var(--size-4) + env(safe-area-max-inset-bottom, env(safe-area-inset-bottom, 0px)));
 }

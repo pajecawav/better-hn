@@ -3,7 +3,7 @@
 	align-items: center;
 	gap: var(--size-1);
 
-	padding: var(--size-2) 0;
+	padding: calc(var(--size-2) + env(safe-area-inset-top, 0px)) 0 var(--size-2);
 	margin-bottom: var(--size-2);
 
 	background: var(--bg);
@@ -12,6 +12,10 @@
 		& {
 			position: sticky;
 			top: 0;
+
+			/* full-bleed: opaque strip must cover the status bar area edge-to-edge */
+			margin-inline: calc(-1 * var(--size-2));
+			padding-inline: var(--size-2);
 		}
 	}
 
