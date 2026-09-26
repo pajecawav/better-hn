@@ -61,6 +61,22 @@ test.describe("Search page", () => {
 		expect(await infos.filter({ hasText: /years? ago/ }).count()).toBe(0);
 	});
 
+	test("supports advanced query syntax", async ({ page }) => {
+		await page.goto("/search");
+		await page.getByTestId("search-input").fill("story:8863");
+
+		const items = page.getByTestId("feed-item");
+		await expect(items).toHaveCount(1);
+	});
+
+	test("highlights query matches in titles", async ({ page }) => {
+		await page.goto("/search");
+		await page.getByTestId("search-input").fill("rust");
+
+		await expect(page.getByTestId("search-feed")).toBeVisible();
+		await expect(page.locator('[data-testid="feed-item"] em').first()).toBeVisible();
+	});
+
 	test("appends the next page via More", async ({ page }) => {
 		await page.goto("/search");
 		await expect(page.getByTestId("search-feed")).toBeVisible();

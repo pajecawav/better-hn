@@ -34,6 +34,13 @@ export interface AlgoliaHit {
 	points?: number | null;
 	num_comments?: number | null;
 	created_at_i?: number;
+	_highlightResult?: {
+		title?: {
+			value: string;
+			matchLevel: "none" | "partial" | "full";
+			matchedWords: string[];
+		};
+	};
 }
 
 export interface AlgoliaSearchResponse {
@@ -52,6 +59,70 @@ export interface AlgoliaSearchParams {
 	signal?: AbortSignal;
 }
 
+export interface ParsedQuery {
+	query: string;
+	tags: string[];
+	numericFilters: string[];
+}
+
+/**
+ * Advanced query syntax, mirroring hn.algolia.com/help:
+ *   author:USERNAME / by:USERNAME -> author_USERNAME tag
+ *   story:ID                      -> story_ID tag
+ *   points>N, comments>N, date>N  -> numericFilters (also <, <=, >=, =)
+ * Quoted phrases are preserved verbatim (the API handles them via
+ * advancedSyntax). Unrecognized tokens stay part of the plain query.
+ */
+const ADVANCED_TOKEN_RE = /^(author|by|story|points|comments|date)(:|<=|>=|<|>|=)([^\s"]+)$/i;
+
+const applyAdvancedToken = (token: string, tags: string[], numericFilters: string[]): boolean => {
+	const match = ADVANCED_TOKEN_RE.exec(token);
+	if (!match) {
+		return false;
+	}
+	const [, key, op, value] = match;
+	const normalizedKey = key.toLowerCase();
+
+	if (normalizedKey === "author" || normalizedKey === "by") {
+		if (op !== ":") {
+			return false;
+		}
+		tags.push(`author_${value}`);
+	} else if (normalizedKey === "story") {
+		if (op !== ":") {
+			return false;
+		}
+		tags.push(`story_${value}`);
+	} else {
+		if (op === ":" || !Number.isFinite(Number(value))) {
+			return false;
+		}
+		const field =
+			normalizedKey === "points"
+				? "points"
+				: normalizedKey === "comments"
+					? "num_comments"
+					: "created_at_i";
+		numericFilters.push(`${field}${op}${value}`);
+	}
+	return true;
+};
+
+export const parseAdvancedQuery = (raw: string): ParsedQuery => {
+	const tags: string[] = [];
+	const numericFilters: string[] = [];
+	const words: string[] = [];
+
+	for (const token of raw.match(/"[^"]*"|\S+/g) ?? []) {
+		if (!token.startsWith('"') && applyAdvancedToken(token, tags, numericFilters)) {
+			continue;
+		}
+		words.push(token);
+	}
+
+	return { query: words.join(" "), tags, numericFilters };
+};
+
 export const algoliaSearch = async ({
 	query,
 	sort = "relevance",
@@ -60,15 +131,20 @@ export const algoliaSearch = async ({
 	signal,
 }: AlgoliaSearchParams): Promise<AlgoliaSearchResponse> => {
 	const endpoint = sort === "date" ? `${API_BASE}/search_by_date` : `${API_BASE}/search`;
+	const parsed = parseAdvancedQuery(query);
 	const params = new URLSearchParams({
-		query,
-		tags: "story",
+		query: parsed.query,
+		tags: ["story", ...parsed.tags].join(","),
 		hitsPerPage: String(HITS_PER_PAGE),
 		page: String(page),
 	});
+	const filters = [...parsed.numericFilters];
 	if (range !== "all") {
 		const since = Math.floor(Date.now() / 1000) - RANGE_SECONDS[range];
-		params.set("numericFilters", `created_at_i>${since}`);
+		filters.unshift(`created_at_i>${since}`);
+	}
+	if (filters.length > 0) {
+		params.set("numericFilters", filters.join(","));
 	}
 
 	return await $fetch<AlgoliaSearchResponse>(`${endpoint}?${params}`, { signal });
@@ -116,10 +192,20 @@ export const timeAgo = (unixSeconds: number): string => {
 	return timeAgoUnit(Math.floor(months / 12), "year");
 };
 
+/** Highlighted title markup from Algolia (<em> wraps the matches), if any. */
+const highlightedTitle = (hit: AlgoliaHit): string | undefined => {
+	const title = hit._highlightResult?.title;
+	if (title && title.matchLevel !== "none" && title.matchedWords.length > 0) {
+		return title.value;
+	}
+	return undefined;
+};
+
 /** Maps an Algolia story hit onto the TopicItem shape consumed by FeedItem. */
 export const toTopicItem = (hit: AlgoliaHit): TopicItem => ({
 	id: Number(hit.objectID),
 	title: hit.title ?? "Untitled",
+	title_html: highlightedTitle(hit),
 	points: hit.points ?? null,
 	user: hit.author ?? null,
 	time: hit.created_at_i ?? 0,

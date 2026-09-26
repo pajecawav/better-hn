@@ -144,6 +144,20 @@
 
 	color: var(--neutral-400);
 
+	p {
+		margin: 0;
+	}
+
+	&__empty {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.syntaxHint {
+		color: var(--neutral-400);
+		font-size: var(--font-size-sm);
+	}
+
 	.retry {
 		border: none;
 		background: none;

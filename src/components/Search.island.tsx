@@ -162,9 +162,13 @@ export const Search = ({ initialQuery, initialSort, initialRange }: SearchProps)
 			)}
 
 			{!isLoading && !error && hits.length === 0 && (
-				<p className="status" data-testid="search-empty">
-					No results found{debouncedQuery && ` for “${debouncedQuery}”`}
-				</p>
+				<div className="status status__empty" data-testid="search-empty">
+					<p>No results found{debouncedQuery && ` for “${debouncedQuery}”`}</p>
+					<p className="syntaxHint">
+						Tip: author:pg, points&gt;100, comments&gt;10, story:123, "exact phrase",
+						-exclude
+					</p>
+				</div>
 			)}
 
 			{!error && hits.length > 0 && (
