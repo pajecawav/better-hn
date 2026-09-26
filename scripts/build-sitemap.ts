@@ -11,7 +11,7 @@ const out = path.resolve(import.meta.dirname, "..", "src/public/sitemap.xml");
 
 console.log(`Generating sitemap to ${out}`);
 
-const tabs = ["top", "new", "ask", "show"];
+const tabs = ["top", "new", "ask", "show", "search"];
 const ids = await $fetch<number[]>("https://hacker-news.firebaseio.com/v0/beststories.json");
 
 const buildEntry = (pathname: string) =>

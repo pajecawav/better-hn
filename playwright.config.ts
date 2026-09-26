@@ -14,6 +14,12 @@ export default defineConfig({
 		baseURL: "http://localhost:3000",
 		trace: "on-first-retry",
 	},
+	expect: {
+		// e2e hit live third-party APIs (hackerwebapp, Algolia); their cold
+		// latency can exceed the default 5s, especially the empty-query
+		// Algolia search which scans the whole index.
+		timeout: 10_000,
+	},
 	webServer: {
 		// NB: run vite directly, bypassing the pnpm wrapper — pnpm 12.6.0 broke
 		// signal forwarding for non-interactive runs (pnpm#7374), leaving
