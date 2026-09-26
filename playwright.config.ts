@@ -15,7 +15,10 @@ export default defineConfig({
 		trace: "on-first-retry",
 	},
 	webServer: {
-		command: "pnpm preview",
+		// NB: run vite directly, bypassing the pnpm wrapper — pnpm 12.6.0 broke
+		// signal forwarding for non-interactive runs (pnpm#7374), leaving
+		// Playwright unable to kill the webServer on teardown, hanging CI.
+		command: "node node_modules/vite/bin/vite.js preview",
 		url: "http://localhost:3000",
 		reuseExistingServer: !process.env.CI,
 	},
