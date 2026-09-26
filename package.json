@@ -41,6 +41,7 @@
 	},
 	"packageManager": "pnpm@12.6.0",
 	"dependencies": {
-		"ofetch": "^1.5.1"
+		"ofetch": "^1.5.1",
+		"swr": "^2.5.1"
 	}
 }

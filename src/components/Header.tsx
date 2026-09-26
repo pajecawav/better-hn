@@ -40,12 +40,7 @@ export const Header = () => {
 			>
 				<PaperAirplaneIcon />
 			</button>
-			<a
-				className="iconButton"
-				title="Search Hacker News"
-				href="https://hn.algolia.com"
-				rel="noreferrer noopener"
-			>
+			<a className="iconButton" title="Search Hacker News" href="/search" data-prefetch>
 				<MagnifyingGlassIcon />
 			</a>
 			<button

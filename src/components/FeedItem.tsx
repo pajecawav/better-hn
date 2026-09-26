@@ -12,7 +12,14 @@ export const FeedItem = ({ item, index }: FeedItemProps) => {
 			<div className="item" data-testid="feed-item">
 				<h2>
 					<a href={item.domain ? item.url! : `/post/${item.id}`} className="link">
-						{item.title}{" "}
+						{item.title_html ? (
+							<span
+								className="titleHtml"
+								dangerouslySetInnerHTML={{ __html: item.title_html }}
+							/>
+						) : (
+							item.title
+						)}{" "}
 						{item.domain && <span className="domain">({item.domain})</span>}
 					</a>
 				</h2>

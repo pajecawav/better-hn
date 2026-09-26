@@ -1,0 +1,190 @@
+.search {
+	margin-top: var(--size-4);
+
+	.feed {
+		margin-top: var(--size-4);
+	}
+
+	.more {
+		border: none;
+		background: none;
+		padding: 0;
+
+		color: inherit;
+		font: inherit;
+		cursor: pointer;
+	}
+}
+
+.searchBox {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--size-2);
+
+	.input {
+		display: flex;
+		align-items: center;
+		flex: 1;
+		min-width: 0;
+
+		border: 2px solid var(--neutral-200);
+		border-radius: var(--radius-md);
+
+		transition: border-color 100ms;
+
+		&:focus-within {
+			border-color: var(--neutral-950);
+		}
+
+		input {
+			width: 100%;
+			min-width: 0;
+			padding: 2px var(--size-3);
+
+			appearance: none;
+			background: transparent;
+			outline: none;
+
+			color: inherit;
+			font: inherit;
+
+			&::placeholder {
+				color: var(--neutral-500);
+			}
+		}
+	}
+
+	.select {
+		position: relative;
+
+		select {
+			display: block;
+			width: 100%;
+
+			padding: 2px var(--size-8) 2px var(--size-3);
+
+			appearance: none;
+			outline: none;
+
+			border: 2px solid var(--neutral-200);
+			border-radius: var(--radius-md);
+
+			background: transparent;
+			color: inherit;
+			font: inherit;
+			cursor: pointer;
+
+			transition: border-color 100ms;
+
+			&:focus {
+				border-color: var(--neutral-950);
+			}
+		}
+
+		.chevron {
+			position: absolute;
+			top: 0;
+			right: var(--size-3);
+			bottom: 0;
+
+			display: grid;
+			place-items: center;
+
+			color: var(--neutral-500);
+			pointer-events: none;
+
+			svg {
+				width: var(--size-4);
+				height: var(--size-4);
+			}
+		}
+	}
+
+	/* On mobile the input takes the whole first row, selects share the second */
+	@media (max-width: 639px) {
+		.input {
+			flex-basis: 100%;
+		}
+
+		.select {
+			flex: 1;
+		}
+	}
+}
+
+.dark .searchBox {
+	.input,
+	.select select {
+		border-color: var(--neutral-700);
+
+		&:focus,
+		&:focus-within {
+			border-color: var(--neutral-400);
+		}
+	}
+
+	.input input::placeholder,
+	.select .chevron {
+		color: var(--neutral-400);
+	}
+
+	/* Opaque background so the closed control and its popup render correctly in dark */
+	.select select {
+		background: var(--neutral-900);
+	}
+}
+
+.status {
+	display: flex;
+	align-items: center;
+	gap: var(--size-2);
+
+	margin-top: var(--size-6);
+
+	color: var(--neutral-400);
+
+	p {
+		margin: 0;
+	}
+
+	&__empty {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.syntaxHint {
+		color: var(--neutral-400);
+		font-size: var(--font-size-sm);
+	}
+
+	.retry {
+		border: none;
+		background: none;
+		padding: 0;
+
+		color: inherit;
+		font: inherit;
+		text-decoration: underline;
+		cursor: pointer;
+	}
+}
+
+.spinner {
+	display: inline-block;
+
+	width: var(--size-4);
+	height: var(--size-4);
+
+	border: 2px solid var(--neutral-400);
+	border-top-color: transparent;
+	border-radius: 50%;
+
+	animation: search-spinner-rotate 0.8s linear infinite;
+}
+
+@keyframes search-spinner-rotate {
+	to {
+		transform: rotate(360deg);
+	}
+}
