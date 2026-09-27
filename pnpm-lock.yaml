@@ -169,6 +169,9 @@ importers:
       ofetch:
         specifier: ^1.5.1
         version: 1.5.1
+      swr:
+        specifier: ^2.5.1
+        version: 2.5.1(react@19.2.8)
     devDependencies:
       '@pajecawav/tools':
         specifier: ^0.0.9
@@ -1033,6 +1036,10 @@ packages:
   defu@6.1.7:
     resolution: {integrity: sha512-7z22QmUWiQ/2d0KkdYmANbRUVABpZ9SNYyH5vx6PZ+nE5bcC0l7uFvEfHlyld/HcGBFTL536ClDt3DEcSlEJAQ==}
 
+  dequal@2.0.3:
+    resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
+    engines: {node: '>=6'}
+
   destr@2.0.5:
     resolution: {integrity: sha512-ugFTXCtDZunbzasqBxrK93Ik/DRYsO6S/fedkWEMKqt04xZ4csmnmwGDBAb07QWNaGMAmnTIemsYZCksjATwsA==}
 
@@ -1450,6 +1457,11 @@ packages:
   strip-final-newline@4.0.0:
     resolution: {integrity: sha512-aulFJcD6YK8V1G7iRB5tigAP4TsHBZZrOV8pjV++zdUwmeV8uzbY7yn6h9MswN62adStNZFuCIx4haBnRuMDaw==}
     engines: {node: '>=18'}
+
+  swr@2.5.1:
+    resolution: {integrity: sha512-BRw55e8r0B7SpDN20CAzoQAHl7y1yP7/Zt7oqUjMv0vSt2u2Xnkm88Ws+VypbV9BXHQVuSuyVq7zMjO16wSExw==}
+    peerDependencies:
+      react: ^16.11.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   tailwind-vars@0.1.6:
     resolution: {integrity: sha512-4CoQU0jEJGzbBhDzNLYU6P2MNjFlO6xtaDgUZGwMWFUDKeKiYllpiEYPs19/qAVIYmk7Y6HbMmxHnNHRcxXbuQ==}
@@ -2091,6 +2103,8 @@ snapshots:
 
   defu@6.1.7: {}
 
+  dequal@2.0.3: {}
+
   destr@2.0.5: {}
 
   detect-libc@2.1.2: {}
@@ -2501,6 +2515,12 @@ snapshots:
   string-argv@0.3.2: {}
 
   strip-final-newline@4.0.0: {}
+
+  swr@2.5.1(react@19.2.8):
+    dependencies:
+      dequal: 2.0.3
+      react: 19.2.8
+      use-sync-external-store: 1.6.0(react@19.2.8)
 
   tailwind-vars@0.1.6: {}
 

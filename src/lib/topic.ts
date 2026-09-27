@@ -14,6 +14,8 @@ export const TOPICS: AvailableTopic[] = [
 export interface TopicItem {
 	id: number;
 	title: string;
+	/** Pre-rendered title markup (e.g. search highlight with <em>), wins over title */
+	title_html?: string;
 	points?: number | null;
 	user?: string | null;
 	time: number;
