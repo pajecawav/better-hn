@@ -5,6 +5,19 @@
 		margin-top: var(--size-4);
 	}
 
+	/* Search match marker: accent orange, like the header buttons */
+	.feed em {
+		font-style: normal;
+		font-weight: 600;
+
+		padding: 0 2px;
+
+		border-radius: var(--radius-sm);
+
+		background: var(--orange-200);
+		color: var(--orange-950);
+	}
+
 	.more {
 		border: none;
 		background: none;
@@ -133,6 +146,11 @@
 	.select select {
 		background: var(--neutral-900);
 	}
+}
+
+.dark .search .feed em {
+	background: var(--orange-950);
+	color: var(--orange-300);
 }
 
 .status {
