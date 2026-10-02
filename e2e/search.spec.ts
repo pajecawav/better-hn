@@ -77,6 +77,28 @@ test.describe("Search page", () => {
 		await expect(page.locator('[data-testid="feed-item"] em').first()).toBeVisible();
 	});
 
+	test("clears title highlights when the query is erased", async ({ page }) => {
+		await page.goto("/search");
+		const input = page.getByTestId("search-input");
+		await input.click();
+
+		// Type a whole word (one debounced commit) and let its results render.
+		await input.pressSequentially("rust", { delay: 50 });
+		await expect(page.getByTestId("search-feed")).toBeVisible();
+		await expect(page.locator('[data-testid="feed-item"] em').first()).toBeVisible();
+
+		// Erase slowly enough that every prefix commits (rus/ru/r/""), like a human.
+		for (let i = 0; i < 4; i++) {
+			await input.press("Backspace");
+			await page.waitForTimeout(500);
+		}
+
+		// The feed falls back to the default stories; no stale <em> markup may survive.
+		await expect(page).toHaveURL("/search");
+		await expect(page.getByTestId("search-feed")).toBeVisible();
+		await expect(page.locator('[data-testid="feed-item"] em')).toHaveCount(0);
+	});
+
 	test("appends the next page via More", async ({ page }) => {
 		await page.goto("/search");
 		await expect(page.getByTestId("search-feed")).toBeVisible();
