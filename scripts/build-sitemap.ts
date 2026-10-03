@@ -12,7 +12,20 @@ const out = path.resolve(import.meta.dirname, "..", "src/public/sitemap.xml");
 console.log(`Generating sitemap to ${out}`);
 
 const tabs = ["top", "new", "ask", "show", "search"];
-const ids = await $fetch<number[]>("https://hacker-news.firebaseio.com/v0/beststories.json");
+const monthAgo = Math.floor(Date.now() / 1000) - 30 * 24 * 60 * 60;
+
+const { hits } = await $fetch<{ hits: Array<{ objectID: string }> }>(
+	"https://hn.algolia.com/api/v1/search",
+	{
+		query: {
+			tags: "story",
+			hitsPerPage: 200,
+			numericFilters: `created_at_i>${monthAgo}`,
+		},
+	},
+);
+
+const ids = hits.map(hit => hit.objectID);
 
 const buildEntry = (pathname: string) =>
 	`\
