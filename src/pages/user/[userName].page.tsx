@@ -3,6 +3,7 @@ import { HTTPError } from "nitro";
 import { withServerTiming } from "nitro/h3";
 import { $fetch } from "ofetch";
 import { Link } from "~/components/Link";
+import { seoHead } from "~/lib/seo";
 import { buildPageTitle } from "~/lib/title";
 import type { User } from "~/lib/user";
 
@@ -20,9 +21,14 @@ export default definePage({
 			throw new HTTPError({ statusCode: 404, message: "User not found" });
 		}
 
-		head.push({
-			title: buildPageTitle(userName),
-		});
+		head.push(
+			seoHead({
+				title: buildPageTitle(userName),
+				description: `Hacker News profile of ${user.id}: ${user.karma} karma, created ${user.created}.`,
+				path: `/user/${user.id}`,
+				ogType: "profile",
+			}),
+		);
 
 		return (
 			<div class="user" data-testid="user">

@@ -6,6 +6,7 @@ import { Comment } from "~/components/Comment";
 import { Link } from "~/components/Link";
 import { replaceHnPostLinks } from "~/lib/link";
 import type { Post, Comment as TComment } from "~/lib/post";
+import { htmlToText, seoHead } from "~/lib/seo";
 import { buildPageTitle } from "~/lib/title";
 
 export default definePage({
@@ -28,10 +29,6 @@ export default definePage({
 			throw new HTTPError({ statusCode: 404, message: "Post not found" });
 		}
 
-		head.push({
-			title: buildPageTitle(post.title),
-		});
-
 		// oxlint-disable-next-line unicorn/consistent-function-scoping
 		const fillCommentsCount = (item: Post | TComment) => {
 			let count = item.comments.length;
@@ -48,6 +45,23 @@ export default definePage({
 		fillCommentsCount(post);
 
 		const url = post.url.startsWith("http") ? post.url : `/item/${post.id}`;
+		const publishedTime = new Date(post.time * 1000).toISOString();
+		const description = [
+			`${post.points} points · ${post.comments_count} ${post.comments_count === 1 ? "comment" : "comments"}`,
+			post.content
+				? htmlToText(post.content).slice(0, 160)
+				: `Discussion of "${post.title}" on Hacker News`,
+		].join(" — ");
+
+		head.push(
+			seoHead({
+				title: buildPageTitle(post.title),
+				description,
+				path: `/post/${post.id}`,
+				ogType: "article",
+				publishedTime,
+			}),
+		);
 
 		return (
 			<>
