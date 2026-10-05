@@ -23,7 +23,8 @@ export default definePage({
 			$fetch<Post>(`https://api.hackerwebapp.com/item/${postId}`),
 		);
 
-		if (!post) {
+		// The API answers 200 with an {error} stub for unknown ids
+		if (!post || !post.id) {
 			throw new HTTPError({ statusCode: 404, message: "Post not found" });
 		}
 
