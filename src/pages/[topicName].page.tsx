@@ -3,7 +3,7 @@ import { HTTPError } from "nitro";
 import { withServerTiming } from "nitro/h3";
 import { $fetch } from "ofetch";
 import { FeedItem } from "~/components/FeedItem";
-import { seoHead } from "~/lib/seo";
+import { jsonLdScript, seoHead, WEBSITE_JSON_LD } from "~/lib/seo";
 import { buildPageTitle } from "~/lib/title";
 import { TOPICS, type TopicItem } from "~/lib/topic";
 
@@ -54,6 +54,13 @@ export default definePage({
 				path: page > 1 ? `/${topic.name}?page=${page}` : `/${topic.name}`,
 			}),
 		);
+
+		// /top is the canonical home page — declare the sitelinks search box
+		if (topic.name === "top") {
+			head.push({
+				script: [{ type: "application/ld+json", innerHTML: jsonLdScript(WEBSITE_JSON_LD) }],
+			});
+		}
 
 		// const items = await $fetch<TopicItem[]>(`https://api.hnpwa.com/v0/${topic.value}/${page}.json`),
 		const items = await withServerTiming(event, "fetch", () =>

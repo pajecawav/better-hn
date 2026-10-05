@@ -1,4 +1,5 @@
 import type { YamfHead } from "@pajecawav/yamf";
+import type { Post } from "~/lib/post";
 
 export const SITE_URL = "https://bhn.pajecawav.dev";
 
@@ -56,3 +57,46 @@ export const seoHead = (input: SeoInput): YamfHead => {
 		link: [{ rel: "canonical", href: canonical }],
 	};
 };
+
+/** Serializes JSON-LD safely for embedding inside a <script> tag */
+export const jsonLdScript = (data: unknown) => JSON.stringify(data).replace(/</g, "\\u003c");
+
+/** WebSite + SearchAction for the canonical home page (/top) */
+export const WEBSITE_JSON_LD = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	name: "Better HN",
+	url: SITE_URL,
+	description: "An alternative UI for Hacker News built with Nitro and Hono",
+	potentialAction: {
+		"@type": "SearchAction",
+		target: {
+			"@type": "EntryPoint",
+			urlTemplate: `${SITE_URL}/search?q={search_term_string}`,
+		},
+		"query-input": "required name=search_term_string",
+	},
+};
+
+/** DiscussionForumPosting for a Hacker News story page */
+export const postJsonLd = (post: Post, commentsCount: number) => ({
+	"@context": "https://schema.org",
+	"@type": "DiscussionForumPosting",
+	url: `${SITE_URL}/post/${post.id}`,
+	headline: post.title.slice(0, 110),
+	...(post.content ? { articleBody: htmlToText(post.content).slice(0, 500) } : {}),
+	datePublished: new Date(post.time * 1000).toISOString(),
+	author: { "@type": "Person", name: post.user },
+	interactionStatistic: [
+		{
+			"@type": "InteractionCounter",
+			interactionType: "https://schema.org/CommentAction",
+			userInteractionCount: commentsCount,
+		},
+		{
+			"@type": "InteractionCounter",
+			interactionType: "https://schema.org/LikeAction",
+			userInteractionCount: post.points,
+		},
+	],
+});

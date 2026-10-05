@@ -6,7 +6,7 @@ import { Comment } from "~/components/Comment";
 import { Link } from "~/components/Link";
 import { replaceHnPostLinks } from "~/lib/link";
 import type { Post, Comment as TComment } from "~/lib/post";
-import { htmlToText, seoHead } from "~/lib/seo";
+import { htmlToText, jsonLdScript, postJsonLd, seoHead } from "~/lib/seo";
 import { buildPageTitle } from "~/lib/title";
 
 export default definePage({
@@ -62,6 +62,15 @@ export default definePage({
 				publishedTime,
 			}),
 		);
+
+		head.push({
+			script: [
+				{
+					type: "application/ld+json",
+					innerHTML: jsonLdScript(postJsonLd(post, post.comments_count)),
+				},
+			],
+		});
 
 		return (
 			<>
