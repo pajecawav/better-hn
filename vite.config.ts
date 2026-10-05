@@ -16,7 +16,9 @@ export default defineConfig({
 				compatibilityDate: "2026-04-29",
 				preset: process.env.VERCEL ? "vercel" : undefined,
 				routeRules: {
-					"/": { redirect: "/top" },
+					// Permanent (not the default 307) so search engines consolidate
+					// link equity on /top instead of treating the move as temporary.
+					"/": { redirect: { to: "/top", status: 308 } },
 					// "/*": { cache: { maxAge: 60 } },
 					// "/post/*": { cache: { maxAge: 60 } },
 					// "/user/*": { cache: { maxAge: 60 } },
