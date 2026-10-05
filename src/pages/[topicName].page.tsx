@@ -10,7 +10,7 @@ import { TOPICS, type TopicItem } from "~/lib/topic";
 const ITEMS_PER_PAGE = 30;
 
 /** Per-topic SEO copy; keys mirror AvailableTopic["name"] */
-const TOPIC_SEO = {
+const TOPIC_SEO: Record<string, { title: string; description: string }> = {
 	top: {
 		title: "Top Stories",
 		description:
@@ -28,7 +28,7 @@ const TOPIC_SEO = {
 		title: "Show HN",
 		description: "Show HN: projects built and shared by the Hacker News community.",
 	},
-} as const;
+};
 
 export default definePage({
 	render: async (event, { head }) => {
