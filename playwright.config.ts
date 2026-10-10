@@ -13,6 +13,7 @@ export default defineConfig({
 	use: {
 		baseURL: "http://localhost:3000",
 		trace: "on-first-retry",
+		screenshot: "only-on-failure",
 	},
 	expect: {
 		// e2e hit live third-party APIs (hackerwebapp, Algolia); their cold
