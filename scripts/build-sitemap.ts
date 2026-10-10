@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { $fetch } from "ofetch";
+import { SITE_URL } from "../src/lib/site.ts";
 
 if (!process.env.CI) {
 	console.log("Skipping sitemap generation in non-CI environment");
@@ -32,9 +33,7 @@ const lastmodBy = new Map(hits.map(hit => [hit.objectID, hit.created_at]));
 const buildEntry = (pathname: string, lastmod?: string) =>
 	`\
 <url>
-    <loc>https://bhn.pajecawav.dev/${pathname}</loc>${
-		lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : ""
-	}
+    <loc>${SITE_URL}/${pathname}</loc>${lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : ""}
 </url>`.trim();
 
 const sitemap = `\

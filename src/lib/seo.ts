@@ -1,7 +1,6 @@
 import type { YamfHead } from "@pajecawav/yamf";
 import type { Post } from "~/lib/post";
-
-export const SITE_URL = "https://bhn.pajecawav.dev";
+import { SITE_URL } from "~/lib/site";
 
 export interface SeoInput {
 	/** Full page title, already built via buildPageTitle */

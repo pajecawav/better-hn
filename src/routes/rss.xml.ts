@@ -1,6 +1,6 @@
 import { defineHandler } from "nitro";
 import { $fetch } from "ofetch";
-import { SITE_URL } from "~/lib/seo";
+import { SITE_URL } from "~/lib/site";
 import type { TopicItem } from "~/lib/topic";
 
 const escapeXml = (text: string) =>
