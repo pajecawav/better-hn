@@ -9,7 +9,7 @@
 		"preview": "vite preview",
 		"lint": "cross-env FORCE_COLOR=1 run-p -l lint:*",
 		"lint:oxlint": "oxlint .",
-		"lint:tsc": "tsgo -b --noEmit",
+		"lint:tsc": "tsc -b --noEmit",
 		"lint:format": "pt format --check",
 		"format": "pt format",
 		"test": "playwright test",
@@ -22,7 +22,6 @@
 		"@pajecawav/yamf": "^0.0.11",
 		"@playwright/test": "^1.64.0",
 		"@types/node": "^26.6.4",
-		"@typescript/native-preview": "7.0.0-dev.20260707.2",
 		"@vercel/analytics": "^2.0.1",
 		"cross-env": "^10.1.0",
 		"hono": "^4.13.13",
@@ -42,6 +41,7 @@
 	"packageManager": "pnpm@12.10.1",
 	"dependencies": {
 		"ofetch": "^1.5.1",
-		"swr": "^2.5.1"
+		"swr": "^2.5.1",
+		"typescript": "^7.0.2"
 	}
 }

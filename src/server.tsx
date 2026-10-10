@@ -7,7 +7,16 @@ export default defineServerEntry({
 			htmlAttrs: {
 				lang: "en",
 			},
-			meta: [{ name: "theme-color", content: getThemeColor(DEFAULT_THEME) }],
+			meta: [
+				{ name: "theme-color", content: getThemeColor(DEFAULT_THEME) },
+				// Re-asserted here: unhead's own viewport default wins over the
+				// template's tag and drops viewport-fit=cover (needed for the
+				// safe-area padding on notched devices)
+				{
+					name: "viewport",
+					content: "width=device-width, initial-scale=1.0, viewport-fit=cover",
+				},
+			],
 		};
 	},
 });

@@ -1,6 +1,7 @@
 import { definePage } from "@pajecawav/yamf";
 import { Search } from "~/components/Search.island";
 import { type SearchRange, type SearchSort } from "~/lib/search";
+import { seoHead } from "~/lib/seo";
 import { buildPageTitle } from "~/lib/title";
 
 export default definePage({
@@ -20,9 +21,16 @@ export default definePage({
 		// The shell is static — all Algolia traffic happens client-side in the island.
 		event.res.headers.set("cache-control", "public, max-age=60, stale-while-revalidate=10");
 
-		head.push({
-			title: buildPageTitle(initialQuery ? `Search: ${initialQuery}` : "Search"),
-		});
+		head.push(
+			seoHead({
+				title: buildPageTitle(initialQuery ? `Search: ${initialQuery}` : "Search"),
+				description: "Search Hacker News stories and comments.",
+				// Results render client-side; query URLs would index as empty
+				// shells, so keep only the bare /search page crawlable.
+				path: "/search",
+				noindex: initialQuery !== "",
+			}),
+		);
 
 		return (
 			<Search
