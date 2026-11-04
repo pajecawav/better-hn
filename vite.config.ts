@@ -15,6 +15,27 @@ export default defineConfig({
 				errorHandler: "./src/error.ts",
 				compatibilityDate: "2026-04-29",
 				preset: process.env.VERCEL ? "vercel" : undefined,
+				tracingChannel: true,
+				experimental: {
+					tracingLogger: true,
+				},
+				cloudflare: {
+					wrangler: {
+						upload_source_maps: true,
+						observability: {
+							enabled: true,
+							traces: {
+								enabled: true,
+								head_sampling_rate: 1,
+							},
+							logs: {
+								enabled: true,
+								head_sampling_rate: 1,
+								invocation_logs: true,
+							},
+						},
+					},
+				},
 				routeRules: {
 					// Permanent (not the default 307) so search engines consolidate
 					// link equity on /top instead of treating the move as temporary.
