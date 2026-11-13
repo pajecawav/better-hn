@@ -4,6 +4,7 @@ import { withServerTiming } from "nitro/h3";
 import { $fetch } from "ofetch";
 import { Comment } from "~/components/Comment";
 import { Link } from "~/components/Link";
+import { bhnApiUrl } from "~/lib/api";
 import { replaceHnPostLinks } from "~/lib/link";
 import type { Post } from "~/lib/post";
 import { htmlToText, jsonLdScript, postJsonLd, seoHead } from "~/lib/seo";
@@ -20,7 +21,7 @@ export default definePage({
 		event.res.headers.set("cache-control", "public, max-age=60, stale-while-revalidate=10");
 
 		const post = await withServerTiming(event, "fetch", () =>
-			$fetch<Post>(`https://api.bhn.pajecawav.dev/item/${postId}`),
+			$fetch<Post>(bhnApiUrl(`/item/${postId}`)),
 		);
 
 		// The API answers 200 with an {error} stub for unknown ids

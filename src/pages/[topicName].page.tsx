@@ -3,6 +3,7 @@ import { HTTPError } from "nitro";
 import { withServerTiming } from "nitro/h3";
 import { $fetch } from "ofetch";
 import { FeedItem } from "~/components/FeedItem";
+import { bhnApiUrl } from "~/lib/api";
 import { jsonLdScript, seoHead, WEBSITE_JSON_LD } from "~/lib/seo";
 import { buildPageTitle } from "~/lib/title";
 import { TOPICS, type TopicItem } from "~/lib/topic";
@@ -63,7 +64,7 @@ export default definePage({
 		}
 
 		const items = await withServerTiming(event, "fetch", () =>
-			$fetch<TopicItem[]>(`https://api.bhn.pajecawav.dev/${topic.value}`, {
+			$fetch<TopicItem[]>(bhnApiUrl(`/${topic.value}`), {
 				query: {
 					offset: (page - 1) * ITEMS_PER_PAGE,
 					limit: ITEMS_PER_PAGE,
