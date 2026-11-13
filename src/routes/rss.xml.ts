@@ -1,5 +1,6 @@
 import { defineHandler } from "nitro";
 import { $fetch } from "ofetch";
+import { bhnApiUrl } from "~/lib/api";
 import { SITE_URL } from "~/lib/site";
 import type { TopicItem } from "~/lib/topic";
 
@@ -14,7 +15,7 @@ const escapeXml = (text: string) =>
 export default defineHandler(async event => {
 	event.res.headers.set("cache-control", "public, max-age=3600");
 
-	const items = await $fetch<TopicItem[]>("https://api.hackerwebapp.com/news?page=1");
+	const items = await $fetch<TopicItem[]>(bhnApiUrl("/news"));
 
 	const feed = `\
 <?xml version="1.0" encoding="UTF-8"?>

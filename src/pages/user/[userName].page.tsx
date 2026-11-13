@@ -3,6 +3,7 @@ import { HTTPError } from "nitro";
 import { withServerTiming } from "nitro/h3";
 import { $fetch } from "ofetch";
 import { Link } from "~/components/Link";
+import { bhnApiUrl } from "~/lib/api";
 import { seoHead } from "~/lib/seo";
 import { buildPageTitle } from "~/lib/title";
 import type { User } from "~/lib/user";
@@ -14,7 +15,7 @@ export default definePage({
 		event.res.headers.set("cache-control", "public, max-age=60, stale-while-revalidate=10");
 
 		const user = await withServerTiming(event, "fetch", () =>
-			$fetch<User>(`https://api.hnpwa.com/v0/user/${userName}.json`),
+			$fetch<User>(bhnApiUrl(`/user/${userName}`)),
 		);
 
 		if (!user) {
