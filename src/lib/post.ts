@@ -23,4 +23,5 @@ export interface Post {
 	domain?: string;
 	comments: Comment[];
 	comments_count: number;
+	parent?: number;
 }

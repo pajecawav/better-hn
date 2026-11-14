@@ -3,6 +3,7 @@ import { HTTPError } from "nitro";
 import { withServerTiming } from "nitro/h3";
 import { $fetch } from "ofetch";
 import { FeedItem } from "~/components/FeedItem";
+import { bhnApiUrl } from "~/lib/api";
 import { jsonLdScript, seoHead, WEBSITE_JSON_LD } from "~/lib/seo";
 import { buildPageTitle } from "~/lib/title";
 import { TOPICS, type TopicItem } from "~/lib/topic";
@@ -62,9 +63,13 @@ export default definePage({
 			});
 		}
 
-		// const items = await $fetch<TopicItem[]>(`https://api.hnpwa.com/v0/${topic.value}/${page}.json`),
 		const items = await withServerTiming(event, "fetch", () =>
-			$fetch<TopicItem[]>(`https://api.hackerwebapp.com/${topic.value}?page=${page}.json`),
+			$fetch<TopicItem[]>(bhnApiUrl(`/${topic.value}`), {
+				query: {
+					offset: (page - 1) * ITEMS_PER_PAGE,
+					limit: ITEMS_PER_PAGE,
+				},
+			}),
 		);
 
 		return (
